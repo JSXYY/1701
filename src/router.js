@@ -6,6 +6,8 @@ vue.use(VueRouter);
 import Home from "./components/home.vue";
 import My from "./components/my.vue";
 import Login from "./components/login.vue";
+import Product from "./components/product.vue";
+import Result from "./components/result.vue";
 import Reg from "./components/reg.vue";
 import Shopcar from "./components/shopcar.vue";
 
