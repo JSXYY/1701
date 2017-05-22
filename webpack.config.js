@@ -25,6 +25,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'//添加对样式表的处理,内联样式
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
@@ -39,8 +43,20 @@ module.exports = {
     }
   },
   devServer: {
-    historyApiFallback: true,
-    noInfo: true
+    inline:true,
+        contentBase: "./",  //content not from webpack is serverd
+        port: '8088',
+
+        historyApiFallback: true,
+
+            //配置服务器
+        proxy:{
+           '/api/*': {
+                  target: 'http://localhost:3000',
+                  host: 'localhost:3000',
+                  changeOrigin:true
+              }
+        }
   },
   performance: {
     hints: false
