@@ -2,7 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>vuextest</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <script>
+        var ometa = document.getElementsByName("viewport")[0];
+
+
+        //下面这句话加上和不加是一样的
+        /*ometa.content ="width=device-width,initial-scale="+1/window.devicePixelRatio+",user-scalable=no";*/
+        //让可布局宽度跟设计稿是一样的
+
+        //动态计算fontsize
+        document.documentElement.style.fontSize =document.documentElement.clientWidth/720*200 +"px";
+    </script>
+    <title>d1忧尚</title>
   </head>
   <body>
     <div id="app"></div>
