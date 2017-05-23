@@ -1,63 +1,12 @@
 	<template>
-		<div class="maindiv">
+		<div>
 			shopcar
-				<div v-show="!isLog" class='nolog'>
-					<p class="logo">
-						
-						<!--<span>购物车图标</span>-->
-						<!--<img src="../assets/cart.png" />-->
-					</p>
-					
-					<p>你的购物车还没有任何商品，快去购物吧。</p>
-					<!--<button>立即去购物》</button>-->
-					<router-link  to="/home" class="shopnow">立即去购物》</router-link>
-					<!--如果用户未登录展示页面-->
-				</div>
-				<div class="islog" v-show="isLog" >
-					
-					<p class="topp">D1优尚网</p>
-					<ul>
-						<li v-for="(data,index) in shoplist">
-							<!--用户已经登录展示页面-->
-							<div class="left">
-								<img />
-							</div>
-							<div class="left right">
-								<p>
-									{{data.name}}
-								</p>		
-								<p><span class="oldprice">{{data.oldprice}}</span><span> 成交价 </span><span class="colorisred">￥{{data.price}}</span></p>
-								<p>
-									<!--<span> 数量：</span><button @click="data.num=data.num-1">-</button><input type="text" v-model="data.num"value="" /><button @click="data.num=data.num-(-1)">+</button>-->						
-									<span> 数量：</span><button class="buttons" @click="del(index)">-</button><input class="inputtext" type="text" v-model="data.num"value="" /><button class="buttons" @click="add(index)">+</button>						
-									
-								</p style="margin-top: 5px;    line-height: .26rem;">
-								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
-								<span>尺码</span><span></span><button class="del"@click="handleDelClick(index)">删除</button>
-								
-							</div>
-						</li>
-						<p class="total"><span class="totalleft">商品件数小计 : </span><span class="colorisred">{{sumnumber}}</span><span> 小计 : </span><span class="colorisred">{{sumprice}}</span></p>
-						<!--<p class="total"><span class="totalleft">商品件数小计:</span><span class="colorisred">{{sumnumber}}</span><span>小计</span><span class="colorisred">{{sum}}</span></p>-->
-					</ul>
-				</div>
-				<div v-show="isLog" class="bottom"style="position: fixed; bottom: 0; z-index: 10; width: 100%">
-					<div class="bottoml">
-						<p>商品总件数 : <span class="colorisred">{{sumnumber}}</span></p>
-						<p> 总金额 : <span class="colorisred">￥{{sumprice}}</span></p>
-					</div>
-					<div class="bottomr">
-						<span>去结算</span>
-					</div>
-				</div>
 		</div>
 	</template>
 
 	<script >
-		import axios from "axios";
-		import router from "../router"; //引入路由对象 ， router.push 就可调用了
-		
 		export default {
+<<<<<<< HEAD
 			data(){
 				return {
 					isLog:true,
@@ -185,11 +134,15 @@
 				}
 				
 			}
+=======
+>>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 		}
 	</script>
 
+
 	<style scoped>
+<<<<<<< HEAD
 		.bottomr span{
 		    cursor: pointer;
 		    display: inline-block;
@@ -353,5 +306,8 @@
 			    width: 50%;
 			    color: #fff;
 		}
+=======
+
+>>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 	</style>

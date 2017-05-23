@@ -90,10 +90,7 @@
 </script>
 
 <style  scoped>
-    *{
-        margin: 0;
-        padding: 0;
-    }
+
     .main {
         min-height: 300px;
         background-color: #fff;
@@ -102,13 +99,7 @@
         margin: 0 auto;
         font-size: 30px;
     }
-    ul{
-        list-style: none;
-    }
-    a {
-        color: #000;
-        text-decoration: none;
-    }
+
     .choose_con {
         font-size: .14rem;
         width: 95%;
