@@ -18,6 +18,7 @@ export default {
 </script>
 
 <style>
+<<<<<<< HEAD
 *{
     margin: 0;
     padding: 0;
@@ -32,4 +33,10 @@ a {
 em, address {
     font-style: normal;
 }
+=======
+	*{
+		margin: 0;
+		padding: 0;
+	}
+>>>>>>> 4e343f576e535ea182ff082253d210aa7e304467
 </style>
