@@ -125,7 +125,7 @@
         }
     </script>
 
- 
+
     <style scoped>
 .p_header, .p_header input, .p_header button {
     font-size: 40px;
@@ -150,7 +150,7 @@
     font-size: 1.5em;
     font-weight: normal;
     font-size: 0.25rem;
-}   
+}
 .p_header .h_txt .h_h2 {
     font-size: .25rem;
     text-align: center;
@@ -295,7 +295,6 @@ ul, ol {
 .footer .top {
     height: 0.70rem;
     line-height: 0.70rem;
-    fax: 1;
     -webkit-box-flex: 1;
     text-align: right;
     padding-right: .30rem;

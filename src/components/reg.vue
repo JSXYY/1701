@@ -1,31 +1,5 @@
     <template>
         <div>
-            <header class="p_header">
-				<div class="h_txt">
-					<div class="pageback">
-						<a href="javascript:window.history.back(-1);"></a>
-					</div>
-					<div class="h_h2">
-						<h2>
-							<i>
-							</i>
-							手机注册
-						</h2>
-					</div>
-					<div class="home">
-						<a href="/wap/index.html">
-						</a>
-					</div>
-					<div class="myuser">
-						<a href="/wap/user/index.html">
-						</a>
-					</div>
-					<div class="carth">
-						<a href="/wap/flow.html">
-						</a>
-					</div>
-				</div>
-			</header>
         	<div class="main">
 				<div class="phonecode  pd">
 					<div class="msg">
@@ -81,10 +55,10 @@
 				<br>
 				</div>
         	</div>
-			
+
 			<div class="reg_msg" id="regmsg" style="display: none;">
 	</div>
-       </div>	
+       </div>
     </template>
 
     <script >
@@ -95,67 +69,6 @@
 
 
     <style scoped>
-	*{
-    		margin: 0;
-    		padding: 0;
-    	}
-    	.p_header{
-	    	font-size: 40px;
-	    	color: #555555;
-	    	font-weight: normal;
-	    	text-align: center;
-	    	background: rgb(236, 236, 236);
-	    	overflow: hidden;
-	    }
-	    .p_header .pageback{
-	    	float: left;
-	    	margin: 0.25em 0.1em 0.15em;
-	    	height: 0.666em;
-	    	width: 0.5em;
-	    	background:url(http://images.d1.com.cn/wap/2014/back2.png) no-repeat;	    	
-	    }
-	    .p_header .h_h2{
-	    	text-align: center;
-	    	line-height: 1.2em;	
-	    	float: left;
-	    	width: 2.294rem;
-	    }
-	    .p_header .h_h2 h2{
-	    	font-size: 0.25rem;
-	    	color: #555555;
-	    	font-weight: normal;
-	    }
-	    .p_header .h_h2 h2 i{
-	    	width: 40px;
-	    	height: 40px;
-	    	display: inline-block;
-	    	vertical-align: middle;
-	    	background: url(http://images.d1.com.cn/wap/2014/d1logo.png) no-repeat;
-	    }
-	    .p_header .home{
-	    	float: left;
-	    	background: url(http://images.d1.com.cn/wap/2014/home.png) no-repeat;
-	    	margin: 0.23em 0.1em 0.2em;
-	    	height: 0.59em;
-	    	width: 0.65em;
-	    	background-size: cover;
-	    }
-	    .p_header .myuser{
-	    	float: left;
-	    	background: url(http://images.d1.com.cn/wap/2014/myd1.png) no-repeat;
-	    	margin: 0.23em 0.1em 0.2em;
-	    	height: 0.59em;
-	    	width: 0.65em;
-	    	background-size: cover;
-	    }
-	    .p_header .carth{
-	    	float: left;
-	    	background: url(http://images.d1.com.cn/wap/2014/cart.png) no-repeat;
-	    	margin: 0.23em 0.1em 0.2em;
-	    	height: 0.59em;
-	    	width: 0.65em;
-	    	background-size: cover;
-	    }
 
 /*main*/
 .main {

@@ -10,6 +10,7 @@ import Product from "./components/product.vue";
 import Result from "./components/result.vue";
 import Reg from "./components/reg.vue";
 import Shopcar from "./components/shopcar.vue";
+import Other from "./components/other.vue";
 import Index from "./components/index.vue"
 const routes= [
 
@@ -37,8 +38,28 @@ const routes= [
 
 	},
 	{
-		path:"/product",
-		component:Product
+		path:"/other",
+		component:Other,
+		redirect:"/other/login" ,
+		children:[
+			{
+				path:"product", //要注意，以 / 开头的嵌套路径会被当作根路径。 /film/coming-soon
+				component:Product
+			},
+			{
+				path:"login",
+				component:Login
+			},
+			{
+				path:"reg",
+				component:Reg
+			},
+
+			{
+				path:"shopcar",
+				component:Shopcar
+			}
+		]
 	},
 	{
 		path:"/result",
@@ -49,19 +70,8 @@ const routes= [
 		path:"/my",
 		component:My
 	},
-	{
-		path:"/login",
-		component:Login
-	},
-	{
-		path:"/reg",
-		component:Reg
-	},
 
-	{
-		path:"/shopcar",
-		component:Shopcar
-	}
+
 
 ]
 

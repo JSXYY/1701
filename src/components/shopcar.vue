@@ -1,20 +1,19 @@
 	<template>
 		<div>
-			shopcar
 			<div v-show="!isLog" class='nolog'>
 					<p class="logo">
-						
+
 						<!--<span>购物车图标</span>-->
 						<!--<img src="../assets/cart.png" />-->
 					</p>
-					
+
 					<p>你的购物车还没有任何商品，快去购物吧。</p>
 					<!--<button>立即去购物》</button>-->
 					<router-link  to="/home" class="shopnow">立即去购物》</router-link>
 					<!--如果用户未登录展示页面-->
 				</div>
 				<div class="islog" v-show="isLog" >
-					
+
 					<p class="topp">D1优尚网</p>
 					<ul>
 						<li v-for="(data,index) in shoplist">
@@ -25,16 +24,16 @@
 							<div class="left right">
 								<p>
 									{{data.name}}
-								</p>		
+								</p>
 								<p><span class="oldprice">{{data.oldprice}}</span><span> 成交价 </span><span class="colorisred">￥{{data.price}}</span></p>
 								<p>
-									<!--<span> 数量：</span><button @click="data.num=data.num-1">-</button><input type="text" v-model="data.num"value="" /><button @click="data.num=data.num-(-1)">+</button>-->						
-									<span> 数量：</span><button class="buttons" @click="del(index)">-</button><input class="inputtext" type="text" v-model="data.num"value="" /><button class="buttons" @click="add(index)">+</button>						
-									
+									<!--<span> 数量：</span><button @click="data.num=data.num-1">-</button><input type="text" v-model="data.num"value="" /><button @click="data.num=data.num-(-1)">+</button>-->
+									<span> 数量：</span><button class="buttons" @click="del(index)">-</button><input class="inputtext" type="text" v-model="data.num"value="" /><button class="buttons" @click="add(index)">+</button>
+
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<span>尺码</span><span></span><button class="del"@click="handleDelClick(index)">删除</button>
-								
+
 							</div>
 						</li>
 						<p class="total"><span class="totalleft">商品件数小计 : </span><span class="colorisred">{{sumnumber}}</span><span> 小计 : </span><span class="colorisred">{{sumprice}}</span></p>
@@ -64,15 +63,15 @@
 			},
 			watch:{
 			},
-			
+
 //			开始执行
 			mounted(){
-		
+
 //				axios.get("").then(res=>{
 //					// console.log(res.data);
 //					//从服务器请求数据
 //				});
-				
+
 				let datalist1=[
 					{
 						name:'fff',
@@ -80,7 +79,7 @@
 						oldprice:'1',
 						price:'11',
 						num:'1'
-						
+
 					},
 					{
 						name:'fff',
@@ -88,7 +87,7 @@
 						oldprice:'1',
 						price:'11',
 						num:'1'
-						
+
 					},
 					{
 						name:'fff',
@@ -96,7 +95,7 @@
 						oldprice:'1',
 						price:'11',
 						num:'1'
-						
+
 					},
 					{
 						name:'fff',
@@ -104,7 +103,7 @@
 						oldprice:'1',
 						price:'11',
 						num:'1'
-						
+
 					},
 					{
 						name:'eee',
@@ -112,9 +111,9 @@
 						oldprice:'1',
 						price:'11',
 						num:'1'
-						
+
 					}];
-					
+
 					this.$store.state.datalist=datalist1;
 
 
@@ -142,7 +141,7 @@
 
 					return sum;
 				},
-				
+
 
 			},
 			methods:{
@@ -155,7 +154,7 @@
 				add(index){
 					this.$store.dispatch("add_goodsnum_action",index);
 				},
-				
+
 				start(){
 			//	判断是否登录，如果登录
 			//
@@ -178,10 +177,10 @@
 
 						}
 					}).then(res=>{
-						
+
 					})
 				}
-				
+
 			}
 
 		}
@@ -226,7 +225,7 @@
 		    line-height: .18rem;
 		    border: 1px solid #c9cbc6;
 		}
-		
+
 		.maindiv{
 		}
 		div{
@@ -271,7 +270,7 @@
 		    line-height: 0.48rem;
 		    padding-left: 0.15rem;
 		    font-size: 0.16rem;
-			
+
 		}
 		.total{
 			/*text-align:right*/
