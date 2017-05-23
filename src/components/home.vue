@@ -1,18 +1,25 @@
 	<template>
 		<div>
 			<div class="header">
-				<div class="logo">
+				<!-- <div class="logo">
 					<img src="../assets/d1_logo.png" height="100%" width="100%">
-				</div>
+				</div> -->
+				<router-link to="/home" tag="div" class="logo">
+					<img src="../assets/d1_logo.png" height="100%" width="100%">
+				</router-link>
 				<div class="search">
 					<input class="inp_sear" type="text"/>
 					<input type="button" value="搜索"  class="inp_btn" />
 				</div>
 				<div class="my">
+					<a href="#my" title="">
 					<img src="../assets/my.png"height="100%" width="100%">
+					</a>
 				</div>
 				<div class="car">
+					<a href="#other/shopcar" title="">
 					<img src="../assets/cart.png" height="100%" width="100%">
+					</a>
 				</div>
 			</div>
 			<div class="nav">
@@ -30,8 +37,8 @@
   			</keep-alive>
 			<div class="footer">
 				<div class="user">
-					<a href="#">请登录</a>
-					<a href="#">注册</a>
+					<a href="#other/login">请登录</a>
+					<a href="#other/reg">注册</a>
 					<a href="#">回到顶部</a>
 				</div>
 				<div class="top">

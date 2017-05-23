@@ -11,12 +11,12 @@
 				</div>
 				<div class="mp_list">
 					<div class="imgDiv">
-						<a href="">
+						<a href="#my">
 							<img src="../assets/menu201503_01_2.jpg"/>
 						</a>
 					</div>
 					<div class="imgDiv">
-						<a href="">
+						<a href="#other/shopcar">
 							<img src="../assets/menu201503_02_2.jpg"/>
 						</a>
 					</div>
