@@ -17,7 +17,7 @@ const store = new vuex.Store({
 						
 					},{
 						name:'ccc',
-						id:'111',
+						id:'222',
 						oldprice:'1',
 						price:'11',
 						num:'1'
@@ -72,10 +72,15 @@ const store = new vuex.Store({
 			state.datalist.splice(payload,1); //删除数据
 		},
 		"add_goodsnum_mutation":function(state,payload){
-//			state.datalist.filter(item=>item.payload-(-1));
+
+			state.datalist[payload]['num']=state.datalist[payload]['num']-(-1)
 		},
 		"del_goodsnum_mutation":function(state,payload){
-//			state.datalist.filter(item=>item.payload-1);
+
+			state.datalist[payload]['num']=state.datalist[payload]['num']-(1)
+			if(state.datalist[payload]['num']<0){
+				state.datalist[payload]['num']=0;
+			}
 			
 			
 		}

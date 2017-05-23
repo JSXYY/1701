@@ -83,9 +83,34 @@
 						price:'11',
 						num:'1'
 						
-					},{
+					},
+					{
+						name:'fff',
+						id:'222',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'fff',
+						id:'333',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'fff',
+						id:'444',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
 						name:'eee',
-						id:'111',
+						id:'555',
 						oldprice:'1',
 						price:'11',
 						num:'1'
@@ -104,7 +129,7 @@
 				sumprice(){
 					var sum =0;
 
-					this.checkedValue.forEach(item=>{
+					this.$store.state.datalist.forEach(item=>{
 						sum+= item.price*item.num;
 					})
 
@@ -113,7 +138,7 @@
 				sumnumber(){
 					var sum =0;
 
-					this.checkedValue.forEach(item=>{
+					this.$store.state.datalist.forEach(item=>{
 						sum+= item.num-0;
 					})
 
@@ -138,7 +163,7 @@
 			//
 				},
 				removeTodo(index){
-					this.datalist.splice(index, 1);
+					this.$store.state.datalist.splice(index, 1);
 				},
 				handleClickadd(id){
 //					增加数据
@@ -278,18 +303,22 @@
 		}
 		.islog ul li{
 			font-size: 0.12rem;
-			line-height: .26rem;
+			line-height: .1rem;
 			list-style: none;
 			overflow: hidden;
 			border-bottom: 1px solid black;
-			padding: 0.15rem;
+			padding: 0.05rem;
+			margin-left: -0.25rem;
 		}
 		.left{
 			float: left;
 		}
+		.left img{
+			margin-top: 0.1rem;
+			margin-right: 0.1rem;
+		}
 		.right{
-			margin-left:0.2rem
-			 ;
+			margin-left:0.05rem;
 		}
 		.oldprice{
 			text-decoration: line-through;
