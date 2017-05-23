@@ -26,15 +26,15 @@
 
         <div class="ftxt">
             <span class="user">
-                <a href="#" class="l">
+                <a href="#other/login" class="l">
                     请登陆
                 </a>
-                <a href="#" class="r">
+                <a href="#other/reg" class="r">
                     注册
                 </a>
             </span>
             <span class="top">
-                <a href="#top">
+                <a href="#">
                     回到顶部
                 </a>
             </span>

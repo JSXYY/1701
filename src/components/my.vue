@@ -97,15 +97,15 @@
         	<div id="footer" class="footer">
 				<div class="ftxt">
 					<span class="user">
-						<a href="login.html" class="l">
+						<a href="#other/login" class="l">
 							请登陆
 						</a>
-						<a href="wxtt.jsp?backurl=/wap/reg.html" class="r">
+						<a href="#other/reg" class="r">
 							注册
 						</a>
 					</span>
 					<span class="top">
-						<a href="#top">
+						<a href="#">
 							回到顶部
 						</a>
 					</span>
