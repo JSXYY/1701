@@ -31,7 +31,6 @@
     "vue-template-compiler": "^2.2.1",
     "vuex": "^2.3.1",
     "webpack": "^2.2.0",
-    "vuex": "^2.3.1",
     "webpack-dev-server": "^2.2.0"
   }
 }
