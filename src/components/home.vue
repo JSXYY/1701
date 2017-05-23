@@ -24,12 +24,12 @@
 			</div>
 			<div class="nav">
 				<ul>
-					<router-link to="index" tag="li"><a>首页</a></router-link>
-					<router-link to="result" tag="li"><a>家居</a></router-link>
-					<router-link to="result" tag="li"><a>数码</a></router-link>
-					<router-link to="result" tag="li"><a>酷装备</a></router-link>
-					<router-link to="result" tag="li"><a>美妆</a></router-link>
-					<router-link to="result" tag="li"><a>秒杀</a></router-link>
+					<router-link to="/home/index" tag="li" active-class="active"><a>首页</a></router-link>
+					<router-link to="/home/result/012" tag="li" active-class="active"><a>家居</a></router-link>
+					<router-link to="/home/result/081" tag="li" active-class="active"><a>数码</a></router-link>
+					<router-link to="/home/result/019" tag="li" active-class="active"><a>酷装备</a></router-link>
+					<router-link to="/home/result/1160" tag="li" active-class="active"><a>美妆</a></router-link>
+					<router-link to="/home/result/3934" tag="li" active-class="active"><a>秒杀</a></router-link>
 				</ul>
 			</div>
 			 <keep-alive>
@@ -39,7 +39,7 @@
 				<div class="user">
 					<a href="#other/login">请登录</a>
 					<a href="#other/reg">注册</a>
-					<a href="#">回到顶部</a>
+					<a>回到顶部</a>
 				</div>
 				<div class="top">
 					客服热线:400-108-5518(工作日9:00-18:00)<br />
@@ -50,11 +50,19 @@
 	</template>
 
 	<script>
-		
+		export default{
+			methods:{
+				
+			}
+		}
 	</script>
 
 
 	<style scoped>
+		.active{
+			border-bottom: 0.05rem solid #ce1b27;
+			box-sizing: border-box;
+		}
 		.header{
 			height: 0.4rem;
 			display: flex;

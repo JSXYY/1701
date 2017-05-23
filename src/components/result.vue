@@ -40,23 +40,23 @@
 
     export default{
 
-        // mounted(){
-        //     //请求后台数据
-        //     axios.get("/api/home").then(res=>{
-        //         console.log(res);
-        //         // this.datalist = res.data.data.billboards
-        //     })
+        mounted(){
+            //请求后台数据
+           /* axios.get("/api/home").then(res=>{
+                console.log(res);
+                // this.datalist = res.data.data.billboards
+            })
 
-        //     axios.get("/api/result").then(res=>{
-        //         console.log(res);
-        //         // this.datalist = res.data.data.billboards
-        //     })
+            axios.get("/api/result").then(res=>{
+                console.log(res);
+                // this.datalist = res.data.data.billboards
+            })*/
 
-        //     // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
-        //     //     console.log(res.data);
-        //     //     this.playinglist=res.data.data.films;
-        //     // })
-        // },
+            // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
+            //     console.log(res.data);
+            //     this.playinglist=res.data.data.films;
+            // })
+        },
 
         // data(){
         //     return {

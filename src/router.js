@@ -29,8 +29,8 @@ const routes= [
 	  			component:Index
 	  		},
 	  		{
-	  			path:"result",
-
+	  			path:"result/:id",
+	  			
 	  			component:Result
 	  		}
 
