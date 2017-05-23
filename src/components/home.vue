@@ -294,7 +294,8 @@
 		}
 		.mp_list a{
 			display: block;
-			height: 0.72rem;
+			height: 0.72rem; 
+			
 		}
 		.tmtit{
 			font-size: 0.16rem;
