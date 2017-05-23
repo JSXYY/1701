@@ -145,6 +145,12 @@
     height: 0.666em;
     width: .50em;
     background: url(http://images.d1.com.cn/wap/2014/back2.png) no-repeat;}
+
+.p_header .h_txt .pageback a{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
  h2 {
     display: block;
     font-size: 1.5em;
