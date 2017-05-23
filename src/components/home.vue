@@ -158,7 +158,6 @@
 				<div class="top">
 					客服热线:400-108-5518(工作日9:00-18:00)<br />
 					Copyright ©2017 京030072
-
 				</div>
 			</div>
 		</div>
@@ -294,8 +293,7 @@
 		}
 		.mp_list a{
 			display: block;
-			height: 0.72rem; 
-			
+			height: 0.72rem;
 		}
 		.tmtit{
 			font-size: 0.16rem;
