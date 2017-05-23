@@ -6,7 +6,7 @@
 				</div>
 				<div class="search">
 					<input class="inp_sear" type="text"/>
-					<input type="submit" value="搜索"  class="inp_btn" />
+					<input type="button" value="搜索"  class="inp_btn" />
 				</div>
 				<div class="my">
 					<img src="../assets/my.png"height="100%" width="100%">
@@ -17,138 +17,17 @@
 			</div>
 			<div class="nav">
 				<ul>
-					<li><a href="#" title="">首页</a></li>
-					<li><a href="#" title="">家居</a></li>
-					<li><a href="#" title="">数码</a></li>
-					<li><a href="#" title="">酷装备</a></li>
-					<li><a href="#" title="">美妆</a></li>
-					<li><a href="#" title="">秒杀</a></li>
+					<router-link to="index" tag="li"><a>首页</a></router-link>
+					<router-link to="result" tag="li"><a>家居</a></router-link>
+					<router-link to="result" tag="li"><a>数码</a></router-link>
+					<router-link to="result" tag="li"><a>酷装备</a></router-link>
+					<router-link to="result" tag="li"><a>美妆</a></router-link>
+					<router-link to="result" tag="li"><a>秒杀</a></router-link>
 				</ul>
 			</div>
-			<div class="main">
-				<div class="swiper-container">
-				    <div class="swiper-wrapper">
-				        <div class="swiper-slide" v-for="(data,index) in swiperList"
-						v-swiperList="index"
-				        >{{data}}</div>
-				    </div>
-				    <!-- 如果需要分页器 -->
-				    <div class="swiper-pagination"></div>
-				</div>
-				<div class="mp_list">
-					<div class="imgDiv">
-						<a href="">
-							<img src="../assets/menu201503_01_2.jpg"/>
-						</a>
-					</div>
-					<div class="imgDiv">
-						<a href="">
-							<img src="../assets/menu201503_02_2.jpg"/>
-						</a>
-					</div>
-					<div class="imgDiv">
-						<a href="">
-							<img src="../assets/menu201503_03_2.jpg"/>
-						</a>
-					</div>
-					<div class="imgDiv">
-						<a href="">
-							<img src="../assets/menu201503_04_2.jpg"/>
-						</a>
-					</div>
-				</div>
-				<div class="mp_list_tm">
-					<div class="tmtit">
-						<p>创意清单</p>
-					</div>
-					<ul>
-						<li v-for = "data in originalityList">
-							<a href="#">
-								{{data}}
-							</a>
-						</li>
-
-					</ul>
-				</div>
-				<div class="mp_list_sg">
-					<div class="tmtit" style="margin-left: 0">
-						<p>创意主题</p>
-					</div>
-					<div class="newlist" style="margin-top:8px">
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-					</div>
-				</div>
-				<div class="mp_list_host">
-					<div class="tmtit">
-						<p>创意主题</p>
-					</div>
-					<div class="host_list">
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			 <keep-alive>
+    		<router-view></router-view>
+  			</keep-alive>
 			<div class="footer">
 				<div class="user">
 					<a href="#">请登录</a>
@@ -164,36 +43,7 @@
 	</template>
 
 	<script>
-		import Swiper from "swiper";
-		import "swiper/dist/css/swiper.css";
-		export default {
-			data(){
-				return{
-					swiperList:[1,2,3,4,5,6,7,8,9],
-					originalityList:[1,2,3,4,5,6,7,8,9,10,11,12]
-				}
-			},
-			methods:{
-				
-			},
-			directives:{
-				"swiperList":{
-					inserted(el,binding,vnode){
-						if(binding.value==vnode.context.swiperList.length-1){
-							var swiper = new Swiper('.swiper-container',{
-                                pagination: '.swiper-pagination', //初始化 分页器
-                                paginationClickable: true, //分页器可以点击
-                                autoplay: 1000,
-                                loop:true,
-                                speed:2000,
-                                spaceBetween: 100
-                            });
-						}
-					}
-				}
-			}
-
-		}
+		
 	</script>
 
 
@@ -236,7 +86,7 @@
 			float: left;
 			background: #393a3f;
 			border: 0;
-			height: 0.23rem;
+			height: 0.24rem;
 			width: 0.3rem;
 			color: white;
 			font-size: 0.12rem;
@@ -264,116 +114,7 @@
 			text-decoration: none;
 			color: white;
 		}
-		.swiper-wrapper{
-			height: 1.82rem;
-			background: red
-		}
-		.swiper-container{
-			margin-top: 0.08rem;
-		}
-		.swiper-slide{
-			width: 100%;
-			height: 100%;
-		}
-		.mp_list{
-			height: 0.72rem;
-			width: 3.44rem;
-			background: red;
-			margin: 0.08rem;
-			display: flex;
-			font-size: 0.16rem;
-		}
-		.mp_list div{
-			height: 0.72rem;
-			width: 0.86rem;
-		}
-		.mp_list img{
-			width: 100%;
-			height: 100%;
-		}
-		.mp_list a{
-			display: block;
-			height: 0.72rem;
-		}
-		.tmtit{
-			font-size: 0.16rem;
-			height: 0.36rem;
-			width: 3.44rem;
-			margin: 0 8px;
-			border-left: 0.04rem solid #f14050;
-			box-sizing: border-box;
-			line-height: 0.36rem;
-			padding-left: 0.12rem;
-			background: white;
-		}
-		.main{
-			background: #f6f6f6;
-			font-size: 0.16rem;
-		}
-		.mp_list_tm ul{
-			width: 3.44rem;
-			margin: 8px;
-		}
-		.mp_list_tm li{
-			width: 1.68rem;
-			height: 0.92rem;
-			list-style: none;
-			margin: 0.017rem;
-			background: red;
-			display: inline-block;
-		}
-		.mp_list_sg{
-			width: 3.44rem;
-			margin: 0 8px;
-		}
-		.listimg{
-			width: 3.44rem;
-			height: 1.8rem;
-		}
-		.listimg a{
-			display: block;
-			height: 1.5rem;
-			background: red;
-		}
-		.listimg h4{
-			text-align: center;
-		}
-		.host_list{
-			width: 3.44rem;
-			margin: 8px;
-		}
-		.host_list div{
-			width: 1.6855rem;
-			height: 2.62rem;
-			display: inline-block;
-			border-bottom: 1px solid #b2b2b2;
-		}
-		.host_list div a{
-			height: 1.6855rem;
-			width: 1.6855rem;
-			background: #ccc;
-			display: block;
-		}
-		.host_p1,.host_p2,.host_p3{
-			width: 1.618rem;
-			margin: 0 4px;
-		}
-		.host_p1{
-			font-size: 0.12rem;
-			height: 0.4rem;
-			color: #2b2b2b;
-		}
-		.host_p2{
-			font-size: 0.12rem;
-			height: 0.2rem;
-			color: #888888;
-		}
-		.host_p3{
-			font-size: 0.18rem;
-			height: 0.224rem;
-			color: #f1424f;
-		}
-		.footer{
+			.footer{
 			height: 1.2rem;
 			margin-bottom: 0.6rem;
 			background: #ececec;

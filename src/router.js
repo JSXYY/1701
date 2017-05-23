@@ -10,17 +10,31 @@ import Product from "./components/product.vue";
 import Result from "./components/result.vue";
 import Reg from "./components/reg.vue";
 import Shopcar from "./components/shopcar.vue";
-
+import Index from "./components/index.vue"
 const routes= [
 
 	{
 		path:"/",
-		redirect:"/home"
+		redirect:"/home",
 	},
 
 	{
 		path:"/home",
-		component:Home
+		component:Home,
+		redirect:"/home/index" , //重定向到这个子路由
+	  	children:[
+	  		{
+	  			path:"index", //要注意，以 / 开头的嵌套路径会被当作根路径。 /film/coming-soon
+	  			component:Index
+	  		},
+	  		{
+	  			path:"result",
+
+	  			component:Result
+	  		}
+
+	  	]
+
 	},
 	{
 		path:"/product",
