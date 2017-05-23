@@ -7,7 +7,7 @@ vue.use(vuex);
 const store = new vuex.Store({
 
 	state:{
-<<<<<<< HEAD
+
 		datalist:[
 					{
 						name:'ddd',
@@ -24,9 +24,7 @@ const store = new vuex.Store({
 						num:'1'
 						
 					}]
-=======
-		datalist:[]
->>>>>>> f446b998e201e782ffda7fb52390ddd325654985
+
 	},
 
 	actions:{
@@ -66,7 +64,6 @@ const store = new vuex.Store({
 			console.log(payload);
 
 			state.datalist.splice(payload,1); //删除数据
-<<<<<<< HEAD
 		},
 		"add_goodsnum_mutation":function(state,payload){
 
@@ -79,9 +76,7 @@ const store = new vuex.Store({
 				state.datalist[payload]['num']=0;
 			}
 			
-			
-=======
->>>>>>> f446b998e201e782ffda7fb52390ddd325654985
+		
 		}
 	}
 })

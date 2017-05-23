@@ -6,7 +6,7 @@
 
 	<script >
 		export default {
-<<<<<<< HEAD
+
 			data(){
 				return {
 					isLog:true,
@@ -134,15 +134,13 @@
 				}
 				
 			}
-=======
->>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 		}
 	</script>
 
 
 	<style scoped>
-<<<<<<< HEAD
+
 		.bottomr span{
 		    cursor: pointer;
 		    display: inline-block;
@@ -306,8 +304,5 @@
 			    width: 50%;
 			    color: #fff;
 		}
-=======
-
->>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 	</style>
