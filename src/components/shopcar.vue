@@ -6,12 +6,308 @@
 
 	<script >
 		export default {
+<<<<<<< HEAD
+			data(){
+				return {
+					isLog:true,
+					checkedValue:this.$store.state.datalist,
+				}
+			},
+			watch:{
+			},
+			
+//			开始执行
+			mounted(){
+		
+//				axios.get("").then(res=>{
+//					// console.log(res.data);
+//					//从服务器请求数据
+//				});
+				
+				let datalist1=[
+					{
+						name:'fff',
+						id:'111',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'fff',
+						id:'222',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'fff',
+						id:'333',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'fff',
+						id:'444',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},
+					{
+						name:'eee',
+						id:'555',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					}];
+					
+					this.$store.state.datalist=datalist1;
+
+
+			},
+			computed:{
+				shoplist(){
+					return this.$store.state.datalist; //拿到状态数据
+				},
+
+				sumprice(){
+					var sum =0;
+
+					this.$store.state.datalist.forEach(item=>{
+						sum+= item.price*item.num;
+					})
+
+					return sum;
+				},
+				sumnumber(){
+					var sum =0;
+
+					this.$store.state.datalist.forEach(item=>{
+						sum+= item.num-0;
+					})
+
+					return sum;
+				},
+				
+
+			},
+			methods:{
+				handleDelClick(index){
+					this.$store.dispatch("DEL_SHOPCAR_ACTION",index);
+				},
+				del(index){
+					this.$store.dispatch("del_goodsnum_action",index);
+				},
+				add(index){
+					this.$store.dispatch("add_goodsnum_action",index);
+				},
+				
+				start(){
+			//	判断是否登录，如果登录
+			//
+				},
+				removeTodo(index){
+					this.$store.state.datalist.splice(index, 1);
+				},
+				handleClickadd(id){
+//					增加数据
+					// console.log(id);
+//					router.push(`/detail/${id}`); //es6的字符串模板
+				},
+				loadMore(){
+
+				},
+				request(){
+					axios.get("",{
+						params:{
+//							请求数据
+
+						}
+					}).then(res=>{
+						
+					})
+				}
+				
+			}
+=======
+>>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 		}
 	</script>
 
 
 	<style scoped>
+<<<<<<< HEAD
+		.bottomr span{
+		    cursor: pointer;
+		    display: inline-block;
+		    background: #cf1719;
+		    color: #fff;
+		    text-align: center;
+		    line-height: .40rem;
+		    font-size: .18rem;
+		    width: 1.5rem;
+		    height: .40rem;
+		    margin-top: 5px;
+		    border-radius: 5px;
+		}
+		.inputtext{
+			display: inline-block;
+		    padding: 0;
+		    margin: 0;
+		    font-size: 0.12rem;
+		    width: .50rem;
+		    height: 0.18rem;
+		    text-align: center;
+		    line-height: .18rem;
+		    border: 1px solid #c9cbc6;
+		}
+		.buttons{
+			margin: 0 4px;
+		    cursor: pointer;
+		    display: inline-block;
+		    background-color: white;
+		    font-size: 0.12rem;
+		    width: 0.18rem;
+		    height: 0.18rem;
+		    text-align: center;
+		    line-height: .18rem;
+		    border: 1px solid #c9cbc6;
+		}
+		
+		.maindiv{
+		}
+		div{
+			font-size: .14rem;
+		}
+		.nolog{
+			text-align: center;
+			.logo{
+				img{
+					height: 10rem;
+				}
+			}
+		}
+		.logo{
+			display: block;
+		    height: 1.2rem;
+		    margin-top: .20rem;
+		    background: url(http://images.d1.com.cn/wap/2014/cart.png) center no-repeat;
+		    background-size: .90rem auto;
+		}
+		.nolog p{
+		    font-size: .14rem;
+			color: #bfbfbf;
+		}
+		.nolog .shopnow{
+		    margin-top: .20rem;
+		    margin-left: 15%;
+		    border-radius: 5px;
+		    line-height: .36rem;
+		    width: 70%;
+		    height: .36rem;
+		    background: #c00000;
+		    color: #ffffff;
+		    text-align: center;
+		    display: block;
+		    text-decoration: none;
+		}
+		.topp{
+		    background: #ededed;
+		    height: 0.48rem;
+		    border-bottom: 1px solid #c6c6c6;
+		    line-height: 0.48rem;
+		    padding-left: 0.15rem;
+		    font-size: 0.16rem;
+			
+		}
+		.total{
+			/*text-align:right*/
+			/*background: red;*/
+			float: right;
+			display: block;
+			-webkit-margin-before: 1em;
+			-webkit-margin-after: 1em;
+			-webkit-margin-start: 0px;
+			-webkit-margin-end: 0px;
+			margin: 0.1rem;
+		}
+		.total .totalleft{
+			/*margin-left: 2rem;*/
+		}
+		.colorisred{
+			 color: #cf1719;
+		}
+		.islog ul li img{
+			float: left;
+			    width: 0.80rem;
+			    height: 0.80rem;
+			    padding: 3px;
+			    border: 1px solid #c9cbc6;
+		}
+		.islog ul{
+				/*padding: 0.15rem;*/
+				font-size: 0.12rem;
+		}
+		.islog ul li{
+			font-size: 0.12rem;
+			line-height: .1rem;
+			list-style: none;
+			overflow: hidden;
+			border-bottom: 1px solid black;
+			padding: 0.05rem;
+			margin-left: -0.25rem;
+		}
+		.left{
+			float: left;
+		}
+		.left img{
+			margin-top: 0.1rem;
+			margin-right: 0.1rem;
+		}
+		.right{
+			margin-left:0.05rem;
+		}
+		.oldprice{
+			text-decoration: line-through;
+		}
+		.del{
+			float: right;
+			right: .20rem;
+		    bottom: 0;
+		    margin-left: 1.2rem;
+		    margin-top: 0.1rem;
+		    display: inline-block;
+		    width: .60rem;
+		    height: .20rem;
+		    line-height: .20rem;
+		    border: 1px solid #c9cbc6;
+		    border-radius: 3px;
+		    background-color: #f5f4f4;
+		    background: -webkit-gradient(linear,0 0,0 100%,from(#fffeff),to(#f5f4f4));
+		    text-align: center;
+		    cursor: pointer;
+		}
+		.bottom{
+			    height: .50rem;
+			    background: #C0C0C0;
+			    font-size: .16rem;
+			    display: -webkit-box;
+			    margin-top: .15rem;
+		}
+		.bottoml{
+				line-height: 0.24rem;
+			    padding-left: .10rem;
+			    width: 50%;
+			    color: #fff;
+		}
+=======
 
+>>>>>>> f446b998e201e782ffda7fb52390ddd325654985
 
 	</style>
