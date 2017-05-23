@@ -7,7 +7,22 @@ vue.use(vuex);
 const store = new vuex.Store({
 
 	state:{
-		datalist:[]
+		datalist:[
+					{
+						name:'ddd',
+						id:'111',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					},{
+						name:'ccc',
+						id:'111',
+						oldprice:'1',
+						price:'11',
+						num:'1'
+						
+					}]
 	},
 
 	actions:{
@@ -25,6 +40,14 @@ const store = new vuex.Store({
 			//通过commit 方法把数据提交给mutations
 			//
 			store.commit("DEL_SHOPCAR_MUTATION",payload);
+		},
+		"add_goodsnum_action":function(store,payload){
+			store.commit("add_goodsnum_mutation",payload);
+			
+		},
+		"del_goodsnum_action":function(store,payload){
+			store.commit("del_goodsnum_mutation",payload);
+			
 		}
 	},
 
@@ -44,10 +67,19 @@ const store = new vuex.Store({
 		},
 
 		"DEL_SHOPCAR_MUTATION":function(state,payload){
-			console.log(payload);
+//			console.log(payload);
 
 			state.datalist.splice(payload,1); //删除数据
+		},
+		"add_goodsnum_mutation":function(state,payload){
+//			state.datalist.filter(item=>item.payload-(-1));
+		},
+		"del_goodsnum_mutation":function(state,payload){
+//			state.datalist.filter(item=>item.payload-1);
+			
+			
 		}
+		
 	}
 })
 
