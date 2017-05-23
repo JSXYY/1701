@@ -8,22 +8,10 @@ const store = new vuex.Store({
 
 	state:{
 
-		datalist:[
-					{
-						name:'ddd',
-						id:'111',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-						
-					},{
-						name:'ccc',
-						id:'222',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-						
-					}]
+		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
+		datalist:[],
+		//下面这个只存储商品id，
+		addshopcarlist:['08100299','01207353']
 
 	},
 
@@ -57,7 +45,7 @@ const store = new vuex.Store({
 		"ADD_SHOPCAR_MUTATION":function(state,payload){
 			// console.log(payload);
 			// 操作state
-			var datalist = state.datalist.filter(item=>item.id==payload.id);
+			var datalist = state.addshopcarlist.filter(item=>item==payload);
 			if(datalist.length==0){
 				state.datalist.push(payload);
 			}else{
@@ -72,6 +60,7 @@ const store = new vuex.Store({
 			console.log(payload);
 
 			state.datalist.splice(payload,1); //删除数据
+			state.addshopcarlist.splice(payload,1);
 		},
 		"add_goodsnum_mutation":function(state,payload){
 

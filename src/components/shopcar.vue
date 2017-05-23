@@ -19,7 +19,7 @@
 						<li v-for="(data,index) in shoplist">
 							<!--用户已经登录展示页面-->
 							<div class="left">
-								<img />
+								<img :src="data.img"/>
 							</div>
 							<div class="left right">
 								<p>
@@ -53,6 +53,7 @@
 	</template>
 
 	<script >
+		    import axios from "axios";
 		export default {
 
 			data(){
@@ -66,55 +67,29 @@
 
 //			开始执行
 			mounted(){
+//传入参数，获取整个对象，处理
+		for(var it1 in this.$store.state.addshopcarlist){
 
-//				axios.get("").then(res=>{
-//					// console.log(res.data);
-//					//从服务器请求数据
-//				});
+			axios.get("/api/shopcar",{
+                params: {
+                ID:this.$store.state.addshopcarlist[it1]
+                }
+                }).then(res=>{
+                	
+                console.log(res.data);
+                // this.datalist = res.data.data.billboards
+                	let indatalist={
+                		name:res.data.pgdsename,
+                		id:res.data.godsid,
+                		oldprice:res.data.saleprice,
+                		price:res.data.hyprice,
+                		num:1,
+                		img:res.data.pimg
+                	}
+                this.$store.state.datalist.push(indatalist);	
+            	})
 
-				let datalist1=[
-					{
-						name:'fff',
-						id:'111',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-
-					},
-					{
-						name:'fff',
-						id:'222',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-
-					},
-					{
-						name:'fff',
-						id:'333',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-
-					},
-					{
-						name:'fff',
-						id:'444',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-
-					},
-					{
-						name:'eee',
-						id:'555',
-						oldprice:'1',
-						price:'11',
-						num:'1'
-
-					}];
-
-					this.$store.state.datalist=datalist1;
+		}
 
 
 			},
@@ -302,7 +277,7 @@
 		}
 		.islog ul li{
 			font-size: 0.12rem;
-			line-height: .1rem;
+			line-height: .32rem;
 			list-style: none;
 			overflow: hidden;
 			border-bottom: 1px solid black;
