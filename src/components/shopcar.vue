@@ -308,7 +308,7 @@
 			overflow: hidden;
 			border-bottom: 1px solid black;
 			padding: 0.05rem;
-			margin-left: -0.25rem;
+			/*margin-left: -0.25rem;*/
 		}
 		.left{
 			float: left;

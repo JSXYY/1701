@@ -42,6 +42,14 @@ const store = new vuex.Store({
 			//通过commit 方法把数据提交给mutations
 			//
 			store.commit("DEL_SHOPCAR_MUTATION",payload);
+		},
+		"add_goodsnum_action":function(store,payload){
+			store.commit("add_goodsnum_mutation",payload);
+			
+		},
+		"del_goodsnum_action":function(store,payload){
+			store.commit("del_goodsnum_mutation",payload);
+			
 		}
 	},
 
