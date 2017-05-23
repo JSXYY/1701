@@ -18,11 +18,7 @@ export default {
 </script>
 
 <style>
-<<<<<<< HEAD
-	#app{
-		height: 100%;
-	}
-=======
+
 *{
     margin: 0;
     padding: 0;
@@ -37,6 +33,8 @@ a{
 em, address {
     font-style: normal;
 }
+	#app{
+		height: 100%;
+	}
 
->>>>>>> ef1af40f9ed69dc56796c4db17a04252a9f3966a
 </style>

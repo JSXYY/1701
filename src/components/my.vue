@@ -127,7 +127,7 @@
 
  
     <style scoped>
-	.p_header, .p_header input, .p_header button {
+.p_header, .p_header input, .p_header button {
     font-size: 40px;
 }
 .p_header .h_txt {

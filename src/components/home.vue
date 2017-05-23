@@ -165,7 +165,7 @@
 
 	<script>
 		import Swiper from "swiper";
-		import "swiper/dist/css/swiper.css"
+		import "swiper/dist/css/swiper.css";
 		export default {
 			data(){
 				return{
