@@ -33,7 +33,7 @@
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<button class="del"@click="handleDelClick(index)">删除</button>
-								<input type="button"@click="addshopcarclick('01207252')"/>
+								<input type="button"@click="addshopcarclick('2&08100184')"/>
 								<!--添加两个点击事件-->
 								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
@@ -150,9 +150,10 @@
 //					}
 //				},
 //				ADD_SHOPCAR_ACTION
-				addshopcarclick(goodsid){
+				addshopcarclick(num){
 					//点击添加按钮不只是要更新
-					this.$store.dispatch("ADD_SHOPCAR_ACTION",goodsid);
+//					console.log(goodsid);
+					this.$store.dispatch("ADD_SHOPCAR_ACTION",num);
 					
 				},
 				handleDelClick(index){
