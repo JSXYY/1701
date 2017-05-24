@@ -5,11 +5,7 @@
 
                     <div class="imgbox">
                         <swipe class="my-swipe" :show-indicators="false">
-                          <swipe-item ><img src="http://images1.d1.com.cn/shopimg/gdsimg/2017/05/12/0120735320170512182959_1_400.jpg"></swipe-item>
-                          <swipe-item ><img src="http://images1.d1.com.cn/shopimg/gdsimg/2017/05/12/0120735320170512183004_3_400.jpg"></swipe-item>
-                          <swipe-item ><img src="http://images1.d1.com.cn/shopimg/gdsimg/2017/05/12/0120735320170518171609_4_400.jpg"></swipe-item>
-                          <swipe-item ><img src="http://images1.d1.com.cn/shopimg/gdsimg/2017/05/12/0120735320170518171610_5_400.jpg"></swipe-item>
-                          <swipe-item ><img src="http://images1.d1.com.cn/shopimg/gdsimg/2017/05/12/0120735320170518171612_6_400.jpg"></swipe-item>
+                          <swipe-item v-for="data in this.data.gimgitems"><img :src="data.gimgitem "></swipe-item>
                         </swipe>
                         <div class="page-nub">
                             <em id="slide-nub" class="fz18">
@@ -25,18 +21,18 @@
                     </div>
                 </div>
                 <h1>
-                    LiLpartner Dream Girl小蛮腰纳米喷雾补水仪
+                    {{data.pgdsname }}
                 </h1>
                 <h2>
-                    小蛮腰纳米喷雾补水仪
+                    {{data.pgdsename}}
                 </h2>
                 <h3>
-                    由 D1优尚网 发货并提供售后服务
+                   {{data.shoptxt  }}
                 </h3>
                 <h4>
                 </h4>
                 <h5>
-                    能给手机充电的纳米喷雾补水仪，一机多用只服小蛮腰！
+                   {{data.pgdstitle }}
                 </h5>
                 <div class="pi_price">
                     <div class="actt">
@@ -47,15 +43,17 @@
                             <font class="py">
                                 ￥
                             </font>
-                            99
+                            {{data.hyprice}}
                         </span>
                         <span class="sprice">
-                            市场价：￥199
+                            市场价：￥{{data.saleprice}}
                         </span>
                     </div>
                     <div class="actzk">
                         <span class="zk">
-                            5.0折
+                            <!-- {{data.hyprice/data.saleprice | currency}} -->
+                            {{discount}}
+                            折
                         </span>
                     </div>
                 </div>
@@ -251,6 +249,7 @@
 
     <script >
         import Vue from "vue";
+        import axios from "axios";
         import { Swipe, SwipeItem } from 'vue-swipe';
         import "vue-swipe/dist/vue-swipe.css";
 
@@ -262,7 +261,34 @@
                     type: Boolean,
                     default: false
                   }
-              }
+            },
+            data(){
+                return{
+                    data:[],
+                }
+            },
+
+            mounted(){
+                axios.get("/api/product",{
+                    params: {
+                    ID:this.$route.query.id
+                    }
+                    }).then(res=>{
+                    this.data = res.data;
+                    // this.products = res.data.products;
+                    console.log(res.data);
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                })
+            },
+            methods: {
+
+            },
+            computed: {
+                discount(){
+                    return (this.data.hyprice/this.data.saleprice).toFixed(2)*10
+                }
+            }
 
         }
     </script>
