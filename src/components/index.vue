@@ -4,7 +4,9 @@
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(data,index) in swiperList"
 						v-swiperList="index"
-				        >{{data}}</div>
+				        >
+							<img :src="data.pmpic">
+				        </div>
 				    </div>
 				    <!-- 如果需要分页器 -->
 				    <div class="swiper-pagination"></div>
@@ -38,7 +40,7 @@
 					<ul>
 						<li v-for = "data in originalityList">
 							<a href="#">
-								{{data}}
+								<img :src="data.pmpic" style="height:100%;width:100%">	
 							</a>
 						</li>
 
@@ -49,37 +51,11 @@
 						<p>创意主题</p>
 					</div>
 					<div class="newlist" style="margin-top:8px">
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
-						</div>
-						<div class="listimg">
-							<a href="#"></a>
-							<h4>与众不同</h4>
+						<div class="listimg" v-for="data in tjList">
+							<a href="#">
+								<img :src="data.pmpic" style="height:100%;width:100%"/>
+							</a>
+							<h4>{{data.pmtitle}}</h4>
 						</div>
 					</div>
 				</div>
@@ -88,37 +64,13 @@
 						<p>创意主题</p>
 					</div>
 					<div class="host_list">
-						<div>
+						<div v-for="data in hostList">
 							<a href="#">
-								
+								<img :src="data.p_img" style="height:100%;width:100%">
 							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
-						</div>
-						<div>
-							<a href="#">
-								
-							</a>
-							<p class="host_p1">你好</p>
-							<p class="host_p2">213</p>
-							<p class="host_p3">321</p>
+							<p class="host_p1">{{data.p_gdsname}}</p>
+							<p class="host_p2">{{data.p_saleprice}}</p>
+							<p class="host_p3">￥{{data.p_mprice}}</p>
 						</div>
 					</div>
 				</div>
@@ -126,16 +78,25 @@
 </template>
 <script>
 	import Swiper from "swiper";
-		import "swiper/dist/css/swiper.css"
+	import axios from "axios";
+	import "swiper/dist/css/swiper.css"
 		export default {
 			data(){
 				return{
-					swiperList:[1,2,3,4,5,6,7,8,9],
-					originalityList:[1,2,3,4,5,6,7,8,9,10,11,12]
+					swiperList:[],
+					originalityList:[],
+					tjList:[],
+					hostList:[]
 				}
 			},
-			methods:{
-				
+			mounted(){
+				axios.get("api/home").then(res=>{
+					console.log(res);
+					this.swiperList = res.data.lblist;
+					this.originalityList = res.data.pmlist;
+					this.tjList = res.data.tjlist;
+					this.hostList = res.data.plistsyc
+				})
 			},
 			directives:{
 				"swiperList":{
@@ -157,12 +118,15 @@
 		}
 </script>
 <style scoped>
-	.swiper-wrapper{
+		.swiper-wrapper{
 			height: 1.82rem;
 			background: red
 		}
 		.swiper-container{
 			margin-top: 0.08rem;
+		}
+		.swiper-wrapper img{
+			height: 1.82rem;
 		}
 		.swiper-slide{
 			width: 100%;
@@ -171,7 +135,6 @@
 		.mp_list{
 			height: 0.72rem;
 			width: 3.44rem;
-			background: red;
 			margin: 0.08rem;
 			display: flex;
 			font-size: 0.16rem;
