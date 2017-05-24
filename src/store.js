@@ -51,11 +51,11 @@ const store = new vuex.Store({
 		},
 		"add_goodsnum_action":function(store,payload){
 			store.commit("add_goodsnum_mutation",payload);
-			
+
 		},
 		"del_goodsnum_action":function(store,payload){
 			store.commit("del_goodsnum_mutation",payload);
-			
+
 		}
 	},
 
@@ -95,7 +95,7 @@ const store = new vuex.Store({
 			                ID:num[1]
 			                }
 			                }).then(res=>
-				
+
 							{
 			                	addagoods(res,num[0],num[1]);
 //			                console.log(res.data);
@@ -108,7 +108,7 @@ const store = new vuex.Store({
 //			                		num:1,
 //			                		img:res.data.pimg
 //			                	}
-//			                this.$store.state.datalist.push(indatalist);	
+//			                this.$store.state.datalist.push(indatalist);
 			            	}
 
 			                )
@@ -122,9 +122,9 @@ const store = new vuex.Store({
 			                		num:num1,
 			                		img:res.data.pimg
 			                	}
-			    state.datalist.push(indatalist);	
+			    state.datalist.push(indatalist);
 			}
-			
+
 //			var datalist = state.addshopcarlist.filter(item=>item==payload);
 //			if(addshopcarlist.length==0){
 //				state.datalist.push(payload);
@@ -159,14 +159,16 @@ const store = new vuex.Store({
 			if(state.datalist[payload]['num']<0){
 				state.datalist[payload]['num']=0;
 			}
+
 			let n=0;
 			n=(payload-(-1))*2-1;
 			state.addshopcarlist[n]=state.addshopcarlist[n]-1;
 			if(state.addshopcarlist[n]<0){
 				state.addshopcarlist[n]=0;
-			}
+			} 
 			
 		
+
 		}
 	}
 })

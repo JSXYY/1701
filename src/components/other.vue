@@ -33,8 +33,8 @@
                     注册
                 </a>
             </span>
-            <span class="top">
-                <a href="#">
+            <span class="top" >
+                <a href="javascript:scroll(0,0)">
                     回到顶部
                 </a>
             </span>
@@ -49,7 +49,15 @@
 </template>
 
 <script>
+    export default{
+        mounted(){
 
+        },
+
+        methods: {
+
+        }
+    }
 </script>
 
 <style scoped>

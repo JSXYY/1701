@@ -28,13 +28,11 @@
 					<router-link to="/home/result/012" tag="li" active-class="active"><a>家居</a></router-link>
 					<router-link to="/home/result/081" tag="li" active-class="active"><a>数码</a></router-link>
 					<router-link to="/home/result/019" tag="li" active-class="active"><a>酷装备</a></router-link>
-					<router-link to="/home/result/1160" tag="li" active-class="active"><a>美妆</a></router-link>
+					<router-link to="/home/result/014001" tag="li" active-class="active"><a>美妆</a></router-link>
 					<router-link to="/home/result/3934" tag="li" active-class="active"><a>秒杀</a></router-link>
 				</ul>
 			</div>
-			 <keep-alive>
     		<router-view></router-view>
-  			</keep-alive>
 			<div class="footer">
 				<div class="user">
 					<a href="#other/login">请登录</a>
@@ -52,7 +50,7 @@
 	<script>
 		export default{
 			methods:{
-				
+
 			}
 		}
 	</script>
