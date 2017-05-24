@@ -12,12 +12,15 @@ const store = new vuex.Store({
 //从addshopcarlist中查找D1服务器中的商品信息，放入datalist中
 //当每次点击添加到购物车按钮时候，先检查addshopcarlist中是否存在商品id，存在不添加，不存在添加id和数量1
 //当在购物车列表删除datalist中的物品时候，返回一个id，同时删除addshopcarlist中的id
+//(function(){
+//	this.state.datalist=['08100299','3','01207353','2'];
+//});
 	state:{
 
 		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
 		datalist:[],
-		//下面这个只存储商品id，
-		addshopcarlist:['08100299','01207353']
+		//下面这个只存储商品id，这是从服务器查找到的
+		addshopcarlist:['08100299','1','01207353','2']
 
 	},
 
@@ -51,18 +54,24 @@ const store = new vuex.Store({
 		"ADD_SHOPCAR_MUTATION":function(state,payload){
 			// console.log(payload);
 			// 操作state
-			let ihave=true;
-			console.log(state.addshopcarlist[1]);
+			let inhave=true;
+//			console.log(state.addshopcarlist[1]);
 			for(let i=0;i<state.addshopcarlist.length;i++){
 //				this.state.addshopcarlist[i]
-				console.log(payload);
-				if(state.addshopcarlist[i]==payload){
-					ihave=false;
-					break;
+//				console.log(payload);
+//state.addshopcarlist[i]>100
+//				console.log(state.addshopcarlist[i]>100);
+				if(state.addshopcarlist[i]>100){
+					
+					if(state.addshopcarlist[i]==payload){
+						inhave=false;
+						break;
+					}
 				}
 			}
-			if(ihave){
+			if(inhave){
 				state.addshopcarlist.push(payload);
+				state.addshopcarlist.push('1');
 				axios.get("/api/shopcar",{
 			                params: {
 			                ID:payload
@@ -70,7 +79,7 @@ const store = new vuex.Store({
 			                }).then(res=>
 				
 							{
-			                	addagoods(res);
+			                	addagoods(res,1);
 //			                console.log(res.data);
 //			                // this.datalist = res.data.data.billboards
 //			                	let indatalist={
@@ -86,13 +95,13 @@ const store = new vuex.Store({
 
 			                )
 			}
-			function addagoods(res){
+			function addagoods(res,num1){
 				let indatalist={
 			                		name:res.data.pgdsename,
 			                		id:res.data.godsid,
 			                		oldprice:res.data.saleprice,
 			                		price:res.data.hyprice,
-			                		num:1,
+			                		num:num1,
 			                		img:res.data.pimg
 			                	}
 			    state.datalist.push(indatalist);	
@@ -110,7 +119,7 @@ const store = new vuex.Store({
 		},
 
 		"DEL_SHOPCAR_MUTATION":function(state,payload){
-			console.log(payload);
+//			console.log(payload);
 
 			state.datalist.splice(payload,1); //删除数据
 			state.addshopcarlist.splice(payload,1);
