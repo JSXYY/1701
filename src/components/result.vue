@@ -14,13 +14,13 @@
             <div class="mp_sort">
                 <div class="mps_con">
                     <div class="mpsc_txt">
-                        <a href="javascript:void(0)" @click="sort(4)" attr="4" class="cur">
+                        <a href="javascript:void(0)" @click="sort(4)" attr="4" :class="[this.order=='4'?'cur':'']">
                             上架时间
                         </a>
-                        <a href="javascript:void(0)" @click="sort(3)"  attr="3">
+                        <a href="javascript:void(0)" @click="sort(3)"  attr="3" :class="[this.order=='3'?'cur':'']">
                             销量
                         </a>
-                        <a href="javascript:void(0)" @click="sort(0)"  attr="0">
+                        <a href="javascript:void(0)" @click="sort(0)"  attr="0" :class="[this.order=='0'?'cur':'']">
                             综合
                         </a>
                     </div>
@@ -149,19 +149,21 @@
 
         methods:{
                 fetchData: function(){
-                    axios.get("/api/result",{
-                        params: {
-                        ID:[this.pagenow,this.$route.params.id,this.order]
-                        }
-                        }).then(res=>{
-                        this.rcklist = res.data.rcklist;
-                        this.products = res.data.products;
-                        this.page = Math.ceil(res.data.page_total / res.data.products.length);
-                        // console.log(res.data.rcklist);
-                        // console.log(res.data.products);
-                        // this.datalist = res.data.data.billboards
-                    })
-                    // console.log(1)
+                    if(this.$route.params.id){
+                        axios.get("/api/result",{
+                            params: {
+                            ID:[this.pagenow,this.$route.params.id,this.order]
+                            }
+                            }).then(res=>{
+                            this.rcklist = res.data.rcklist;
+                            this.products = res.data.products;
+                            this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                            // console.log(res.data.rcklist);
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                        })
+                        // console.log(1)
+                    }
                 },
                 rcklistloading(data){
                     this.back.push(data);

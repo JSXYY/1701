@@ -20,7 +20,7 @@
         </div>
     </div>
     <keep-alive>
-        <router-view></router-view>
+        <router-view ></router-view>
     </keep-alive>
     <div id="footer" class="footer">
 
@@ -55,7 +55,9 @@
         },
 
         methods: {
-
+            // handleClick(data){
+            //     console.log(data);
+            // }
         }
     }
 </script>

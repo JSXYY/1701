@@ -249,6 +249,7 @@
                 },
                 gotop(){
                     javascript:scroll(0,0)
+                    // $('html').animate({scrollTop: '0px'},100)
                 },
                 minus(){
                     if(this.num>1){
@@ -263,7 +264,10 @@
                 discount(){
                     return (this.data.hyprice/this.data.saleprice).toFixed(2)*10
                 }
-            }
+            },
+            // created (){
+            //       this.$emit('mjy',"我的");
+            // },
 
         }
     </script>
@@ -473,7 +477,7 @@
         }
         .main .comslist li .item .itop .l {
             display: block;
-            width: 1.80rem;
+            width: 100%;
             height: .25rem;
             line-height: .24rem;
         }
