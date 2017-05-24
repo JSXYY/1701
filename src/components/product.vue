@@ -1,5 +1,5 @@
     <template>
-        <div>
+        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
             <div class="p_item">
                 <div class="pi_img">
 
@@ -15,7 +15,7 @@
                                 /
                             </em>
                             <em id="slide-sum" class="fz12">
-                                5
+                                {{bannerlength}}
                             </em>
                         </div>
                     </div>
@@ -69,11 +69,11 @@
                             商品数量：
                         </span>
                         <span class="pcount">
-                            <a onclick="minus()" class="r">
+                            <a @click="minus()" class="r">
                                 -
                             </a>
-                            <input type="text" class="num" value="1" id="pnum" name="pnum">
-                            <a onclick="add()" class="l">
+                            <input type="text" class="num" v-model="num" id="pnum" name="pnum">
+                            <a @click="add()" class="l">
                                 +
                             </a>
                         </span>
@@ -81,7 +81,7 @@
                     <div class="pis_bot">
                     </div>
                 </div>
-                <div class="pi_dtl pcomt" style="border-top: 8px solid #E8E6E6">
+                <div v-show="length" class="pi_dtl pcomt" style="border-top: 8px solid #E8E6E6">
                     <div class="pid_com" style="border-left: 4px solid #f14050;">
                         <a href="gdscom.html?id=01207353">
                             商品评价
@@ -90,77 +90,21 @@
                             <img src="http://images.d1.com.cn/images2014/index/star.png" border="0">
                             <img src="http://images.d1.com.cn/images2014/index/star.png" border="0">
                             <img src="http://images.d1.com.cn/images2014/index/star.png" border="0">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7人评论
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{length}}人评论
                         </a>
                     </div>
                 </div>
                 <div class="comslist">
                     <ul>
-                        <li>
+                        <li v-for="data in data.coms">
                             <div class="item">
                                 <div class="itop">
                                     <span class="l">
-                                        ***zhuzhi&nbsp;&nbsp;2017-05-18&nbsp;&nbsp;&nbsp;&nbsp;
+                                        {{data.crname}}&nbsp;&nbsp;{{data.stime }}&nbsp;&nbsp;&nbsp;&nbsp;
                                     </span>
                                 </div>
                                 <div class="txt">
-                                    美容补水与移动电源结合，同时还方便携带，简直就是太完美啦！很喜欢！ 此款值得拥有。&nbsp;&nbsp;
-                                    <font color="red">
-                                    </font>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <div class="itop">
-                                    <span class="l">
-                                        ***qq6315&nbsp;&nbsp;2017-05-11&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </span>
-                                </div>
-                                <div class="txt">
-                                    不错，可以补水还可以充电，我就不用每次出门玩都要带一个补水仪还有充电宝了，轻松出门。&nbsp;&nbsp;
-                                    <font color="red">
-                                    </font>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <div class="itop">
-                                    <span class="l">
-                                        ***xhwzoo&nbsp;&nbsp;2017-05-10&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </span>
-                                </div>
-                                <div class="txt">
-                                    很小巧，外观好看，很容易带，我放钱包都可以，哈哈 可能我钱包比较大。&nbsp;&nbsp;
-                                    <font color="red">
-                                    </font>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <div class="itop">
-                                    <span class="l">
-                                        ***kawe57&nbsp;&nbsp;2017-05-10&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </span>
-                                </div>
-                                <div class="txt">
-                                    真的很好用，样子也很好看，时尚高端大气水雾很细密超级赞&nbsp;&nbsp;
-                                    <font color="red">
-                                    </font>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item">
-                                <div class="itop">
-                                    <span class="l">
-                                        ***182230&nbsp;&nbsp;2017-05-09&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </span>
-                                </div>
-                                <div class="txt">
-                                    还不错 把水雾化的非常细 在热天送来一丝清凉 推荐，女孩子都该有一个这个。&nbsp;&nbsp;
+                                    {{data.ctxt }}&nbsp;&nbsp;
                                     <font color="red">
                                     </font>
                                 </div>
@@ -176,72 +120,23 @@
                     （为了保证最佳浏览效果，建议横屏看）
                 </div>
             </div>
-            <div class="detail" id="detail">
-                <br>
-                <p>
-                    <span style="font-family:Microsoft YaHei;">
-                        <span style="font-size:24px;color:#cc0000;">
-                            随时随地滋润肌肤
-                        </span>
-                    </span>
-                </p>
-                <p>
-                    <span style="font-family:Microsoft YaHei;">
-                        <span style="font-size:18px;">
-                            喷雾快速补水，摆脱干燥；
-                        </span>
-                    </span>
-                </p>
-                <p>
-                    <span style="font-family:Microsoft YaHei;">
-                        <span style="font-size:18px;">
-                            3000mAh，可作移动电源；
-                        </span>
-                    </span>
-                </p>
-                <p>
-                    <span style="font-family:Microsoft YaHei;">
-                        <span style="font-size:18px;">
-                            独特小蛮腰灵感外观设计。
-                        </span>
-                    </span>
-                    <br>
-                </p>
-                <p>
-                    <br>
-                </p>
-                <p>
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/2a807738-70c6-4f3a-befc-f601c9458009.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/99fb82c3-fb8e-4b43-99fb-e59ce8e423ac.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/55fd0da2-da5e-41ef-bd3d-923867e9ab6b.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/5185712c-9c1b-4e8d-b06e-0776fe190a71.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/6467095d-1ef2-43a6-bb61-a9ea65f33c43.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/afdfffe0-5410-4760-9183-0f7a9ae76349.png"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/944a8ffc-27f5-457e-bf8c-838d68ced3a7.jpg"
-                    alt="">
-                    <img src="http://images1.d1.com.cn/shopimg/gdsimg/201705/image/5094a313-9820-4619-bfb0-445a97be2871.png"
-                    alt="">
-                </p>
+            <div class="detail" id="detail" v-html="getgdsdetail">
+
+
             </div>
 
 
 
             <div class="pis_cart" id="cart1" style="position: fixed; bottom: 0; z-index: 10;">
                 <div class="pisc_but">
-                    <a class="fav l" id="fav" onclick="addFavorite(this)" title="01207353"><span></span>收藏商品</a>
+                    <a class="fav l" id="fav" ><span></span>收藏商品</a>
                 </div>
                 <div class="pisc_but">
-                    <a id="add_cart" onclick="addcart(this)" class="add_cart  r" title="01207353"><span></span>加入购物车</a>
+                    <a id="add_cart" @click="addshopcarclick" class="add_cart  r" ><span></span>加入购物车</a>
                 </div>
             </div>
 
-            <div class="bottom-to-top" title="返回顶部" style="display:block">
+            <div class="bottom-to-top" title="返回顶部"  @click="gotop" style="display:block">
                 <img src="http:///images.d1.com.cn/images2016/gtotop.png" style="width: 100%;">
             </div>
         </div>
@@ -250,9 +145,10 @@
     <script >
         import Vue from "vue";
         import axios from "axios";
+        // import infiniteScroll from 'vue-infinite-scroll';
         import { Swipe, SwipeItem } from 'vue-swipe';
         import "vue-swipe/dist/vue-swipe.css";
-
+        // Vue.use(infiniteScroll);
         Vue.component('swipe', Swipe);
         Vue.component('swipe-item', SwipeItem);
         export default {
@@ -265,9 +161,18 @@
             data(){
                 return{
                     data:[],
+                    loading:false,
+                    length:'',
+                    getgdsdetail:"",
+                    num:"1",
+                    bannerlength:'',
+
                 }
             },
-
+            watch: {
+               // 如果路由有变化，会再次执行该方法
+               '$route.query.id': ['fetchData2','loadMore']
+             },
             mounted(){
                 axios.get("/api/product",{
                     params: {
@@ -275,14 +180,84 @@
                     }
                     }).then(res=>{
                     this.data = res.data;
+                    this.length = res.data.coms.length;
+                    this.bannerlength = res.data.gimgitems.length;
                     // this.products = res.data.products;
-                    console.log(res.data);
+                    // console.log(res.data.coms.length);
                     // console.log(res.data.products);
                     // this.datalist = res.data.data.billboards
                 })
             },
             methods: {
+                addshopcarclick(){
+                    //点击添加按钮不只是要更新
+                    this.$store.dispatch("ADD_SHOPCAR_ACTION",this.num+"&"+this.$route.query.id);
 
+                },
+                fetchData2: function(){
+                    if(this.$route.query.id){
+                        // console.log(this.$route.query.id);
+                    axios.get("/api/product",{
+                        params: {
+                        ID:this.$route.query.id
+                        }
+                        }).then(res=>{
+                        this.data = res.data;
+                        // console.log(this.$route.query.id);
+                        this.length = res.data.coms.length;
+                        this.bannerlength = res.data.gimgitems.length;
+                        // this.products = res.data.products;
+                        // console.log(res.data.coms.length);
+                        // console.log(res.data.products);
+                        // this.datalist = res.data.data.billboards
+                    })
+                    }
+                },
+                loadMore(){
+                    // console.log(1);
+                    this.loading = true;
+                    axios.get("/api/getgdsdetail",{
+                        params: {
+                        ID:this.data.gdsid
+                        }
+                        }).then(res=>{
+                        this.getgdsdetail = res.data.gdsdetail ;
+                        // console.log(res.data.gdsdetail);
+                        // this.datalist = res.data.data.billboards
+                    })
+                    this.loading = false;
+
+                    // if(this.num>this.total){
+                    //     //所有数据请求完成
+                    //     this.message = "没有更多数据了..."
+                    //     return ;
+                    // }
+                    // axios.get("/v4/api/film/now-playing",{
+                    //     params:{
+                    //         page:this.num++,
+                    //         count:7
+                    //     }
+                    // }).then(res=>{
+                    //     console.log(res.data);
+                    //     //数组解构
+                    //     this.datalist = [...this.datalist,...res.data.data.films];
+
+                    //     this.loading = false;
+                    //     //防止数据多次加载
+                    //     this.total = res.data.data.page.total;
+                    // })
+                },
+                gotop(){
+                    javascript:scroll(0,0)
+                },
+                minus(){
+                    if(this.num>1){
+                        this.num--;
+                    }
+                },
+                add(){
+                    this.num++;
+                }
             },
             computed: {
                 discount(){
@@ -294,7 +269,7 @@
     </script>
 
 
-    <style  scoped>
+    <style  >
 
 
         .main .p_item {
@@ -528,9 +503,7 @@
         }
         .main .detail img {
             display: block;
-            max-width: 100%;
-            width: auto !important;
-            height: auto !important;
+            width: 100%;
         }
         .main .pis_cart {
             width: 100%;

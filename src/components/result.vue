@@ -2,10 +2,10 @@
     <div class="main">
         <div class="choose_con">
             <ul class="chc_row" id="chrck">
-                <li data="">
+                <li @click="goback"  data="">
                     返回上级分类
                 </li>
-                <li v-for="(data,index) in this.rcklist" :data=data.rckcode>
+                <li v-for="(data,index) in this.rcklist" @click="rcklistloading(data.rckcode)">
                     {{data.rckname }}
                 </li>
             </ul>
@@ -14,13 +14,13 @@
             <div class="mp_sort">
                 <div class="mps_con">
                     <div class="mpsc_txt">
-                        <a href="javascript:void(0)" attr="4" class="cur">
+                        <a href="javascript:void(0)" @click="sort(4)" attr="4" class="cur">
                             上架时间
                         </a>
-                        <a href="javascript:void(0)" attr="3">
+                        <a href="javascript:void(0)" @click="sort(3)"  attr="3">
                             销量
                         </a>
-                        <a href="javascript:void(0)" attr="0">
+                        <a href="javascript:void(0)" @click="sort(0)"  attr="0">
                             综合
                         </a>
                     </div>
@@ -64,71 +64,32 @@
                 </ul>
                 <div class="m_page">
                     <div class="mp_cell s">
-                        <a attr="012,,,4,1,,,0" href="javascript:void(0)">
+                        <a attr="012,,,4,1,,,0" @click="first"  href="javascript:void(0)">
                             首页
                         </a>
                     </div>
-                    <div class="mp_cell l" style="display: none;">
+                    <div class="mp_cell l" @click="pre"  style="display: none;">
                         上一页
                     </div>
                     <div class="mp_cell m">
                         <span class="vselect">
-                            1/14&nbsp;
+                            {{this.pagenow}}/{{this.page}}&nbsp;
                             <i>
                             </i>
                         </span>
-                        <select class="go_select" onchange="gourl(this.value);">
-                            <option value="012,,,4,1,,,0" v-for="data in " selected="">
-                                第1页
+                        <select class="go_select">
+                            <option :value="data" v-for="(data,index) in this.page"   >
+                                第{{data}}页
                             </option>
-                            <!-- <option value="012,,,4,2,,,0">
-                                第2页
-                            </option>
-                            <option value="012,,,4,3,,,0">
-                                第3页
-                            </option>
-                            <option value="012,,,4,4,,,0">
-                                第4页
-                            </option>
-                            <option value="012,,,4,5,,,0">
-                                第5页
-                            </option>
-                            <option value="012,,,4,6,,,0">
-                                第6页
-                            </option>
-                            <option value="012,,,4,7,,,0">
-                                第7页
-                            </option>
-                            <option value="012,,,4,8,,,0">
-                                第8页
-                            </option>
-                            <option value="012,,,4,9,,,0">
-                                第9页
-                            </option>
-                            <option value="012,,,4,10,,,0">
-                                第10页
-                            </option>
-                            <option value="012,,,4,11,,,0">
-                                第11页
-                            </option>
-                            <option value="012,,,4,12,,,0">
-                                第12页
-                            </option>
-                            <option value="012,,,4,13,,,0">
-                                第13页
-                            </option>
-                            <option value="012,,,4,14,,,0">
-                                第14页
-                            </option> -->
                         </select>
                     </div>
                     <div class="mp_cell r">
-                        <a attr="012,,,4,2,,,0" href="javascript:void(0)">
+                        <a attr="012,,,4,2,,,0" @click="next" href="javascript:void(0)">
                             下一页
                         </a>
                     </div>
                     <div class="mp_cell e">
-                        <a attr="012,,,4,14,,,0" href="javascript:void(0)">
+                        <a attr="012,,,4,14,,,0" @click="last"  href="javascript:void(0)">
                             尾页
                         </a>
                     </div>
@@ -157,12 +118,13 @@
             // })
             axios.get("/api/result",{
                 params: {
-                ID:this.$route.params.id
+                ID:[this.pagenow,this.$route.params.id,this.order]
                 }
                 }).then(res=>{
                 this.rcklist = res.data.rcklist;
                 this.products = res.data.products;
-                // console.log(res.data.rcklist);
+                this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                // console.log(this.page );
                 // console.log(res.data.products);
                 // this.datalist = res.data.data.billboards
             })
@@ -176,7 +138,12 @@
             return {
                 products :[],
                 rcklist :[],
+                back:[this.$route.params.id],
                 num:"1",
+                page:'',
+                select:"",
+                pagenow:'1',
+                order:"4"
             }
         },
 
@@ -184,7 +151,24 @@
                 fetchData: function(){
                     axios.get("/api/result",{
                         params: {
-                        ID:this.$route.params.id
+                        ID:[this.pagenow,this.$route.params.id,this.order]
+                        }
+                        }).then(res=>{
+                        this.rcklist = res.data.rcklist;
+                        this.products = res.data.products;
+                        this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                        // console.log(res.data.rcklist);
+                        // console.log(res.data.products);
+                        // this.datalist = res.data.data.billboards
+                    })
+                    // console.log(1)
+                },
+                rcklistloading(data){
+                    this.back.push(data);
+                    // console.log(this.back);
+                    axios.get("/api/result",{
+                        params: {
+                        ID:[this.pagenow,data,this.order]
                         }
                         }).then(res=>{
                         this.rcklist = res.data.rcklist;
@@ -193,7 +177,70 @@
                         // console.log(res.data.products);
                         // this.datalist = res.data.data.billboards
                     })
-                    console.log(1)
+                },
+                goback(){
+                    this.back.pop();
+                    var id = this.back[this.back.length-1];
+                    // console.log(id);
+                    if(id){
+                        axios.get("/api/result",{
+                            params: {
+                            ID:[this.pagenow,id,this.order]
+                            }
+                            }).then(res=>{
+                            this.rcklist = res.data.rcklist;
+                            this.products = res.data.products;
+                            // console.log(res.data.rcklist);
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                        })
+                    }
+                },
+                load(){
+                        axios.get("/api/result",{
+                            params: {
+                            ID:[this.pagenow,this.$route.params.id,this.order]
+                            }
+                            }).then(res=>{
+                            this.rcklist = res.data.rcklist;
+                            this.products = res.data.products;
+                            // this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                            // console.log(this.page );
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                        })
+                },
+                next(){
+                    console.log(1);
+                    $(".l").css("display","block");
+                    if(this.pagenow<this.page){
+                        this.pagenow++;
+                        this.load();
+                    }
+                },
+                last(){
+                    $(".l").css("display","block");
+                    this.pagenow=this.page;
+                    this.load();
+                },
+                first(){
+                    $(".l").css("display","none");
+                    this.pagenow="1";
+                    this.load();
+                },
+                pre(){
+                    if(this.pagenow>1){
+                        this.pagenow--
+                    }
+                    if(this.pagenow<2){
+                        $(".l").css("display","none");
+                    }
+                    this.load();
+                },
+                sort(data){
+                    console.log(data);
+                    this.order=data;
+                    this.load();
                 }
 
             // swiperload(index){
