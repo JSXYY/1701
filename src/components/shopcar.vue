@@ -19,7 +19,7 @@
 						<li v-for="(data,index) in shoplist">
 							<!--用户已经登录展示页面-->
 							<div class="left">
-								<img :src="data.img"/>
+								<a :href="'#/other/product?id='+data.id"><img :src="data.img"/></a>
 							</div>
 							<div class="left right">
 								<p>
@@ -33,6 +33,9 @@
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<span>尺码</span><span></span><button class="del"@click="handleDelClick(index)">删除</button>
+								<input type="button"@click="addshopcarclick('01207252')"/>
+								<!--添加两个点击事件-->
+								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
 							</div>
 						</li>
@@ -48,7 +51,9 @@
 					<div class="bottomr">
 						<span>去结算</span>
 					</div>
+					
 				</div>
+				
 		</div>
 	</template>
 
@@ -67,29 +72,28 @@
 
 //			开始执行
 			mounted(){
-//传入参数，获取整个对象，处理
-		for(var it1 in this.$store.state.addshopcarlist){
+//传入参数，获取整个对象，处理	
+				for(var it1 in this.$store.state.addshopcarlist){
+						axios.get("/api/shopcar",{
+			                params: {
+			                ID:this.$store.state.addshopcarlist[it1]
+			                }
+			                }).then(res=>{
+			                	
+			                console.log(res.data);
+			                // this.datalist = res.data.data.billboards
+			                	let indatalist={
+			                		name:res.data.pgdsename,
+			                		id:res.data.gdsid,
+			                		oldprice:res.data.saleprice,
+			                		price:res.data.hyprice,
+			                		num:1,
+			                		img:res.data.pimg
+			                	}
+			                this.$store.state.datalist.push(indatalist);	
+			            	})
+					}
 
-			axios.get("/api/shopcar",{
-                params: {
-                ID:this.$store.state.addshopcarlist[it1]
-                }
-                }).then(res=>{
-                	
-                console.log(res.data);
-                // this.datalist = res.data.data.billboards
-                	let indatalist={
-                		name:res.data.pgdsename,
-                		id:res.data.godsid,
-                		oldprice:res.data.saleprice,
-                		price:res.data.hyprice,
-                		num:1,
-                		img:res.data.pimg
-                	}
-                this.$store.state.datalist.push(indatalist);	
-            	})
-
-		}
 
 
 			},
@@ -120,6 +124,34 @@
 
 			},
 			methods:{
+//				askshow(){
+//					for(var it1 in this.$store.state.addshopcarlist){
+//						axios.get("/api/shopcar",{
+//			                params: {
+//			                ID:this.$store.state.addshopcarlist[it1]
+//			                }
+//			                }).then(res=>{
+//			                	
+//			                console.log(res.data);
+//			                // this.datalist = res.data.data.billboards
+//			                	let indatalist={
+//			                		name:res.data.pgdsename,
+//			                		id:res.data.godsid,
+//			                		oldprice:res.data.saleprice,
+//			                		price:res.data.hyprice,
+//			                		num:1,
+//			                		img:res.data.pimg
+//			                	}
+//			                this.$store.state.datalist.push(indatalist);	
+//			            	})
+//					}
+//				},
+//				ADD_SHOPCAR_ACTION
+				addshopcarclick(goodsid){
+					//点击添加按钮不只是要更新
+					this.$store.dispatch("ADD_SHOPCAR_ACTION",goodsid);
+					
+				},
 				handleDelClick(index){
 					this.$store.dispatch("DEL_SHOPCAR_ACTION",index);
 				},
