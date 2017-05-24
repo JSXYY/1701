@@ -32,7 +32,7 @@
 
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
-								<span>尺码</span><span></span><button class="del"@click="handleDelClick(index)">删除</button>
+								<button class="del"@click="handleDelClick(index)">删除</button>
 								<input type="button"@click="addshopcarclick('01207252')"/>
 								<!--添加两个点击事件-->
 								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
@@ -74,24 +74,27 @@
 			mounted(){
 //传入参数，获取整个对象，处理	
 				for(var it1 in this.$store.state.addshopcarlist){
+					if(this.$store.state.addshopcarlist[it1]>100){
+						let nu=it1-(-1);
 						axios.get("/api/shopcar",{
 			                params: {
 			                ID:this.$store.state.addshopcarlist[it1]
 			                }
 			                }).then(res=>{
 			                	
-			                console.log(res.data);
+//			                console.log(res.data);
 			                // this.datalist = res.data.data.billboards
 			                	let indatalist={
 			                		name:res.data.pgdsename,
 			                		id:res.data.gdsid,
 			                		oldprice:res.data.saleprice,
 			                		price:res.data.hyprice,
-			                		num:1,
+			                		num:this.$store.state.addshopcarlist[nu],
 			                		img:res.data.pimg
 			                	}
 			                this.$store.state.datalist.push(indatalist);	
 			            	})
+					}
 					}
 
 
@@ -120,7 +123,7 @@
 
 					return sum;
 				},
-
+ 
 
 			},
 			methods:{
@@ -174,20 +177,6 @@
 					// console.log(id);
 //					router.push(`/detail/${id}`); //es6的字符串模板
 				},
-				loadMore(){
-
-				},
-				request(){
-					axios.get("",{
-						params:{
-//							请求数据
-
-						}
-					}).then(res=>{
-
-					})
-				}
-
 			}
 
 		}
