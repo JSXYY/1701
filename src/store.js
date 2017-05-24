@@ -20,7 +20,7 @@ const store = new vuex.Store({
 		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
 		datalist:[],
 		//下面这个只存储商品id，这是从服务器查找到的
-		addshopcarlist:['08100299','1','01207353','2',"01207358","3"],
+		addshopcarlist:[],
 //		func:(function(){
 //			console.log(this.state.addshopcarlist);
 //		})()
@@ -73,7 +73,7 @@ const store = new vuex.Store({
 //state.addshopcarlist[i]>100
 //				console.log(state.addshopcarlist[i]>100);
 				if(state.addshopcarlist[i]>100){
-						console.log(state.addshopcarlist[i]==num[1]);
+//						console.log(state.addshopcarlist[i]==num[1]);
 					
 					if(state.addshopcarlist[i]==num[1]){
 						inhave=false;
