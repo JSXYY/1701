@@ -20,17 +20,26 @@ const store = new vuex.Store({
 		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
 		datalist:[],
 		//下面这个只存储商品id，这是从服务器查找到的
-		addshopcarlist:['08100299','1','01207353','2']
+		addshopcarlist:[],
+//		func:(function(){
+//			console.log(this.state.addshopcarlist);
+//		})()
+//		addaxios(){
+//			addshopcarlist=['08100299','2','01207353','2',"01207358","3"]
+//		}
 
 	},
 
 	actions:{
-		"ADD_SHOPCAR_ACTION":function(store,payload){
+		"ADD_SHOPCAR_ACTION":function(store,num,payload){
 			// console.log(payload);
 			//可以根据这参数去后台请求数据， 也可以在这里对数据进行加工
 			//通过commit 方法把数据提交给mutations
 			//
-			store.commit("ADD_SHOPCAR_MUTATION",payload);
+			var all1=null;
+//			console.log(arguments[1]);
+			all1=num.split("&")
+			store.commit("ADD_SHOPCAR_MUTATION",all1);
 		},
 
 		"DEL_SHOPCAR_ACTION":function(store,payload){
@@ -51,9 +60,11 @@ const store = new vuex.Store({
 	},
 
 	mutations:{
-		"ADD_SHOPCAR_MUTATION":function(state,payload){
+		"ADD_SHOPCAR_MUTATION":function(state,num,payload){
 			// console.log(payload);
 			// 操作state
+			
+			
 			let inhave=true;
 //			console.log(state.addshopcarlist[1]);
 			for(let i=0;i<state.addshopcarlist.length;i++){
@@ -62,24 +73,31 @@ const store = new vuex.Store({
 //state.addshopcarlist[i]>100
 //				console.log(state.addshopcarlist[i]>100);
 				if(state.addshopcarlist[i]>100){
+//						console.log(state.addshopcarlist[i]==num[1]);
 					
-					if(state.addshopcarlist[i]==payload){
+					if(state.addshopcarlist[i]==num[1]){
 						inhave=false;
+//						console.log('已存在id不添加，立即退出查找循环');
+//						console.log(state.addshopcarlist);
+						
 						break;
 					}
 				}
 			}
+			
 			if(inhave){
-				state.addshopcarlist.push(payload);
-				state.addshopcarlist.push('1');
+//				console.log('不存在开始添加');
+				state.addshopcarlist.push(num[1]);
+				state.addshopcarlist.push(num[0]);
+//				console.log(state.addshopcarlist);
 				axios.get("/api/shopcar",{
 			                params: {
-			                ID:payload
+			                ID:num[1]
 			                }
 			                }).then(res=>
 
 							{
-			                	addagoods(res,1);
+			                	addagoods(res,num[0],num[1]);
 //			                console.log(res.data);
 //			                // this.datalist = res.data.data.billboards
 //			                	let indatalist={
@@ -95,10 +113,10 @@ const store = new vuex.Store({
 
 			                )
 			}
-			function addagoods(res,num1){
+			function addagoods(res,num1,id1){
 				let indatalist={
 			                		name:res.data.pgdsename,
-			                		id:res.data.godsid,
+			                		id:res.data.gdsid,
 			                		oldprice:res.data.saleprice,
 			                		price:res.data.hyprice,
 			                		num:num1,
@@ -116,17 +134,24 @@ const store = new vuex.Store({
 //			}
 
 			// console.log(state.datalist);
+//			console.log(state.datalist);
+//			console.log(state.addshopcarlist);
 		},
 
 		"DEL_SHOPCAR_MUTATION":function(state,payload){
 //			console.log(payload);
 
 			state.datalist.splice(payload,1); //删除数据
-			state.addshopcarlist.splice(payload,1);
+			state.addshopcarlist.splice(payload*2,2);
+//			console.log(state.datalist);
+//			console.log(state.addshopcarlist);
 		},
 		"add_goodsnum_mutation":function(state,payload){
 
 			state.datalist[payload]['num']=state.datalist[payload]['num']-(-1)
+			let n=0;
+			n=(payload-(-1))*2-1;
+			state.addshopcarlist[n]=state.addshopcarlist[n]-(-1);
 		},
 		"del_goodsnum_mutation":function(state,payload){
 
@@ -135,6 +160,14 @@ const store = new vuex.Store({
 				state.datalist[payload]['num']=0;
 			}
 
+			let n=0;
+			n=(payload-(-1))*2-1;
+			state.addshopcarlist[n]=state.addshopcarlist[n]-1;
+			if(state.addshopcarlist[n]<0){
+				state.addshopcarlist[n]=0;
+			} 
+			
+		
 
 		}
 	}

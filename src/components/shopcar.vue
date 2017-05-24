@@ -33,7 +33,7 @@
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<button class="del"@click="handleDelClick(index)">删除</button>
-								<input type="button"@click="addshopcarclick('01207252')"/>
+								<input type="button"@click="addshopcarclick('2&08100184')"/>
 								<!--添加两个点击事件-->
 								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
@@ -72,30 +72,35 @@
 
 //			开始执行
 			mounted(){
-//传入参数，获取整个对象，处理	
-				for(var it1 in this.$store.state.addshopcarlist){
-					if(this.$store.state.addshopcarlist[it1]>100){
-						let nu=it1-(-1);
-						axios.get("/api/shopcar",{
-			                params: {
-			                ID:this.$store.state.addshopcarlist[it1]
-			                }
-			                }).then(res=>{
+				axios.post("/api/usercar",{username:"mujunyu"}).then(res=>{
+//			                	console.log(res.data);
+			            this.$store.state.addshopcarlist=res.data.split(",");
+						for(var it1 in this.$store.state.addshopcarlist){
+							if(this.$store.state.addshopcarlist[it1]>100){
+								let nu=it1-(-1);
+								axios.get("/api/shopcar",{
+					                params: {
+					                ID:this.$store.state.addshopcarlist[it1]
+					                }
+					                }).then(res=>{
+		//			                console.log(res.data);
+					                // this.datalist = res.data.data.billboards
+					                	let indatalist={
+					                		name:res.data.pgdsename,
+					                		id:res.data.gdsid,
+					                		oldprice:res.data.saleprice,
+					                		price:res.data.hyprice,
+					                		num:this.$store.state.addshopcarlist[nu],
+					                		img:res.data.pimg
+					                	}
+					                this.$store.state.datalist.push(indatalist);	
+					            	})
+							}
+						}
 			                	
-//			                console.log(res.data);
-			                // this.datalist = res.data.data.billboards
-			                	let indatalist={
-			                		name:res.data.pgdsename,
-			                		id:res.data.gdsid,
-			                		oldprice:res.data.saleprice,
-			                		price:res.data.hyprice,
-			                		num:this.$store.state.addshopcarlist[nu],
-			                		img:res.data.pimg
-			                	}
-			                this.$store.state.datalist.push(indatalist);	
-			            	})
-					}
-					}
+			                	
+			    });
+//传入参数，获取整个对象，处理	
 
 
 
@@ -150,9 +155,10 @@
 //					}
 //				},
 //				ADD_SHOPCAR_ACTION
-				addshopcarclick(goodsid){
+				addshopcarclick(num){
 					//点击添加按钮不只是要更新
-					this.$store.dispatch("ADD_SHOPCAR_ACTION",goodsid);
+//					console.log(goodsid);
+					this.$store.dispatch("ADD_SHOPCAR_ACTION",num);
 					
 				},
 				handleDelClick(index){
