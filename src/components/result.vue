@@ -27,6 +27,13 @@
                 </div>
             </div>
             <div class="mp_list">
+
+
+                <a class="pmpic" v-for="data in this.pics" :href="[data.pmurl=='#'?'1':'#other/product'+data.pmurl.substring(data.pmurl.lastIndexOf('?'))]" >
+                    <img :src="data.pmpic ">
+                </a>
+
+
                 <ul>
                     <li v-for="(data,index) in this.products">
                         <div :class='[index%2=="0"?"iteml":"itemr2"]'>
@@ -118,19 +125,30 @@
             //     // this.datalist = res.data.data.billboards
             // })
             Indicator.open();
-            axios.get("/api/result",{
-                params: {
-                ID:[this.pagenow,this.$route.params.id,this.order]
+            if(this.$route.params.id=="3934"){
+                axios.get("/api/getpagespg").then(res=>{
+                    this.pics = res.data.pics;
+                    console.log(this.pics );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
+            }else{
+
+                axios.get("/api/result",{
+                    params: {
+                    ID:[this.pagenow,this.$route.params.id,this.order]
+                    }
+                    }).then(res=>{
+                    this.rcklist = res.data.rcklist;
+                    this.products = res.data.products;
+                    this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                    // console.log(this.page );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
                 }
-                }).then(res=>{
-                this.rcklist = res.data.rcklist;
-                this.products = res.data.products;
-                this.page = Math.ceil(res.data.page_total / res.data.products.length);
-                // console.log(this.page );
-                // console.log(res.data.products);
-                // this.datalist = res.data.data.billboards
-                Indicator.close();
-            })
             // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
             //     console.log(res.data);
             //     this.playinglist=res.data.data.films;
@@ -146,7 +164,8 @@
                 page:'',
                 select:"",
                 pagenow:'1',
-                order:"4"
+                order:"4",
+                pics:[],
             }
         },
 
@@ -282,7 +301,7 @@
     }
 </script>
 
-<style  scoped>
+<style >
 
     .main {
         min-height: 300px;
@@ -291,6 +310,9 @@
         min-width: 320px;
         margin: 0 auto;
         font-size: 30px;
+    }
+    .pmpic img {
+        width: 100%;
     }
 
     .choose_con {
