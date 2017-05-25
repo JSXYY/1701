@@ -38,10 +38,10 @@
 						<p>创意清单</p>
 					</div>
 					<ul>
-						<li v-for = "data in originalityList">
-							<a href="#">
+						<li v-for = "data in originalityList" @click = "handelClick(data)">
+							
 								<img :src="data.pmpic" style="height:100%;width:100%">	
-							</a>
+							
 						</li>
 
 					</ul>
@@ -51,20 +51,24 @@
 						<p>创意主题</p>
 					</div>
 					<div class="newlist" style="margin-top:8px">
-						<div class="listimg" v-for="data in tjList">
-							<a href="#">
+						<div class="listimg" v-for="data in tjList"  @click = "handelClick(data)">
+							
 								<img :src="data.pmpic" style="height:100%;width:100%"/>
-							</a>
+							
 							<h4>{{data.pmtitle}}</h4>
 						</div>
 					</div>
 				</div>
 				<div class="mp_list_host">
 					<div class="tmtit">
-						<p>创意主题</p>
+						<p>创意爆款</p>
 					</div>
 					<div class="host_list">
-						<div v-for="data in hostList">
+						<div v-for="data in hostList"  @click = "handelClick(data)"
+							v-infinite-scroll="loadMore"
+  							infinite-scroll-disabled="loading"
+  							infinite-scroll-distance="50"
+						>
 							<a href="#">
 								<img :src="data.p_img" style="height:100%;width:100%">
 							</a>
@@ -77,6 +81,9 @@
 			</div>
 </template>
 <script>
+	import { InfiniteScroll } from 'mint-ui';
+	import Vue from "vue";
+	Vue.use(InfiniteScroll);
 	import Swiper from "swiper";
 	import axios from "axios";
 	import "swiper/dist/css/swiper.css"
@@ -87,6 +94,40 @@
 					originalityList:[],
 					tjList:[],
 					hostList:[]
+				}
+			},
+			methods:{
+				handelClick:function(a){
+					var urlStr = a.pmurl;
+					var subUrl = "";
+					var resultUrl = "";
+					if (urlStr.indexOf("rackcode") != -1) {
+						
+						subUrl = urlStr.substring(urlStr.indexOf("rackcode"));
+						var resultUrl =subUrl.substring(subUrl.indexOf("=") + 1);
+						window.location.assign("#/home/result/" + resultUrl)
+
+					}else if (urlStr.indexOf("shopview") != -1) {
+						subUrl = urlStr.substring(urlStr.indexOf("shopview"));
+						resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1))
+
+					}else if(urlStr.indexOf("product") != -1) {
+						subUrl = urlStr.substring(urlStr.indexOf("product"));
+						resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1));
+						window.location.assign("#/other/product" + resultUrl)
+
+					}
+					console.log(resultUrl)
+				},
+				loadMore() {
+					  this.loading = true;
+					  setTimeout(() => {
+					    let last = this.hostList[this.hostList.length - 1];
+					    for (let i = 1; i <= 10; i++) {
+					      this.hostList.push(last + i);
+					    }
+					    this.loading = false;
+					  }, 2500);
 				}
 			},
 			mounted(){
@@ -105,10 +146,10 @@
 							var swiper = new Swiper('.swiper-container',{
                                 pagination: '.swiper-pagination', //初始化 分页器
                                 paginationClickable: true, //分页器可以点击
-                                autoplay: 1000,
+                                autoplay: 3000,
                                 loop:true,
-                                speed:2000,
-                                spaceBetween: 100
+                                speed:1000,
+                                
                             });
 						}
 					}
@@ -120,7 +161,6 @@
 <style scoped>
 		.swiper-wrapper{
 			height: 1.82rem;
-			background: red
 		}
 		.swiper-container{
 			margin-top: 0.08rem;
@@ -175,7 +215,6 @@
 			height: 0.92rem;
 			list-style: none;
 			margin: 0.017rem;
-			background: red;
 			display: inline-block;
 		}
 		.mp_list_sg{
@@ -189,7 +228,6 @@
 		.listimg a{
 			display: block;
 			height: 1.5rem;
-			background: red;
 		}
 		.listimg h4{
 			text-align: center;
