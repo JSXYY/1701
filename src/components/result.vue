@@ -102,6 +102,7 @@
 
 <script >
     import axios from "axios";
+    import { Indicator } from 'mint-ui';
     // import Swiper from "swiper";
     // console.log(Swiper);
     // import "swiper/dist/css/swiper.css"; //单独引入swiper css文件
@@ -116,6 +117,7 @@
             //     console.log(res);
             //     // this.datalist = res.data.data.billboards
             // })
+            Indicator.open();
             axios.get("/api/result",{
                 params: {
                 ID:[this.pagenow,this.$route.params.id,this.order]
@@ -127,6 +129,7 @@
                 // console.log(this.page );
                 // console.log(res.data.products);
                 // this.datalist = res.data.data.billboards
+                Indicator.close();
             })
             // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
             //     console.log(res.data);
@@ -150,6 +153,7 @@
         methods:{
                 fetchData: function(){
                     if(this.$route.params.id){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
@@ -161,6 +165,7 @@
                             // console.log(res.data.rcklist);
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
                         })
                         // console.log(1)
                     }
@@ -168,6 +173,7 @@
                 rcklistloading(data){
                     this.back.push(data);
                     // console.log(this.back);
+                    Indicator.open();
                     axios.get("/api/result",{
                         params: {
                         ID:[this.pagenow,data,this.order]
@@ -178,13 +184,17 @@
                         // console.log(res.data.rcklist);
                         // console.log(res.data.products);
                         // this.datalist = res.data.data.billboards
+                        Indicator.close();
+
                     })
                 },
                 goback(){
+
                     this.back.pop();
                     var id = this.back[this.back.length-1];
                     // console.log(id);
                     if(id){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,id,this.order]
@@ -195,10 +205,12 @@
                             // console.log(res.data.rcklist);
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
                         })
                     }
                 },
                 load(){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
@@ -210,10 +222,12 @@
                             // console.log(this.page );
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
+
                         })
                 },
                 next(){
-                    console.log(1);
+                    // console.log(1);
                     $(".l").css("display","block");
                     if(this.pagenow<this.page){
                         this.pagenow++;
@@ -240,7 +254,7 @@
                     this.load();
                 },
                 sort(data){
-                    console.log(data);
+                    // console.log(data);
                     this.order=data;
                     this.load();
                 }

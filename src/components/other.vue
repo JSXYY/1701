@@ -19,9 +19,7 @@
             <router-link to="shopcar"></router-link>
         </div>
     </div>
-    <keep-alive>
         <router-view ></router-view>
-    </keep-alive>
     <div id="footer" class="footer">
 
         <div class="ftxt">
