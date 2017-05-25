@@ -22,7 +22,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="nav" id="nav">
+			<div class="nav">
 				<ul>
 					<router-link to="/home/index" tag="li" active-class="active"><a>首页</a></router-link>
 					<router-link to="/home/result/012" tag="li" active-class="active"><a>家居</a></router-link>
@@ -51,8 +51,10 @@
 
 	<script>
 		export default{
-			methods:{
-				
+			mounted(){
+				/*window.onscroll = function(){
+					console.log(111)
+				}*/
 			}
 		}
 	</script>
