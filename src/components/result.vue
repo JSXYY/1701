@@ -13,7 +13,7 @@
         <div class="m_plist">
             <div class="mp_sort">
                 <div class="mps_con">
-                    <div class="mpsc_txt">
+                    <div class="mpsc_txt"  v-if="isShow">
                         <a href="javascript:void(0)" @click="sort(4)" attr="4" :class="[this.order=='4'?'cur':'']">
                             上架时间
                         </a>
@@ -27,6 +27,13 @@
                 </div>
             </div>
             <div class="mp_list">
+
+
+                <a class="pmpic" v-for="data in this.pics" @click="handleUrl(data)" >
+                    <img :src="data.pmpic ">
+                </a>
+
+
                 <ul>
                     <li v-for="(data,index) in this.products">
                         <div :class='[index%2=="0"?"iteml":"itemr2"]'>
@@ -62,7 +69,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="m_page">
+                <div class="m_page"  v-if="isShow">
                     <div class="mp_cell s">
                         <a attr="012,,,4,1,,,0" @click="first"  href="javascript:void(0)">
                             首页
@@ -118,19 +125,30 @@
             //     // this.datalist = res.data.data.billboards
             // })
             Indicator.open();
-            axios.get("/api/result",{
-                params: {
-                ID:[this.pagenow,this.$route.params.id,this.order]
+            if(this.$route.params.id=="3934"){
+                axios.get("/api/getpagespg").then(res=>{
+                    this.pics = res.data.pics;
+                    // console.log(this.pics );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
+            }else{
+
+                axios.get("/api/result",{
+                    params: {
+                    ID:[this.pagenow,this.$route.params.id,this.order]
+                    }
+                    }).then(res=>{
+                    this.rcklist = res.data.rcklist;
+                    this.products = res.data.products;
+                    this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                    // console.log(this.page );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
                 }
-                }).then(res=>{
-                this.rcklist = res.data.rcklist;
-                this.products = res.data.products;
-                this.page = Math.ceil(res.data.page_total / res.data.products.length);
-                // console.log(this.page );
-                // console.log(res.data.products);
-                // this.datalist = res.data.data.billboards
-                Indicator.close();
-            })
             // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
             //     console.log(res.data);
             //     this.playinglist=res.data.data.films;
@@ -146,13 +164,17 @@
                 page:'',
                 select:"",
                 pagenow:'1',
-                order:"4"
+                order:"4",
+                pics:[],
+                isShow:true,
             }
         },
 
         methods:{
                 fetchData: function(){
-                    if(this.$route.params.id){
+                    this.isShow=true;
+                    this.pics=[];
+                    if(this.$route.params.id!=3934){
                         Indicator.open();
                         axios.get("/api/result",{
                             params: {
@@ -168,6 +190,18 @@
                             Indicator.close();
                         })
                         // console.log(1)
+                    }else{
+                        this.products=[];
+                        this.rcklist =[];
+                        this.isShow=false;
+                        Indicator.open();
+                        axios.get("/api/getpagespg").then(res=>{
+                            this.pics = res.data.pics;
+                            // console.log(this.pics );
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                            Indicator.close();
+                        })
                     }
                 },
                 rcklistloading(data){
@@ -187,6 +221,23 @@
                         Indicator.close();
 
                     })
+                },
+                handleUrl(data){
+                    if(data.pmurl=='#'){
+                    // console.log(1);
+                        return
+                    }else if(data.pmurl.lastIndexOf('shopview')!=-1){
+                    // console.log(2);
+                        return
+                    }else{
+                        if(data.pmurl.lastIndexOf('@')!=-1){
+                    // console.log(3);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?'),data.pmurl.lastIndexOf('@')))
+                        }else{
+                    // console.log(4);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?')))
+                        }
+                    }
                 },
                 goback(){
 
@@ -282,7 +333,7 @@
     }
 </script>
 
-<style  scoped>
+<style >
 
     .main {
         min-height: 300px;
@@ -291,6 +342,9 @@
         min-width: 320px;
         margin: 0 auto;
         font-size: 30px;
+    }
+    .pmpic img {
+        width: 100%;
     }
 
     .choose_con {

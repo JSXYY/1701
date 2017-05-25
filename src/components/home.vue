@@ -49,6 +49,7 @@
 
 	<script>
 		export default{
+
 			methods:{
 				backTop:function(){
 					if(scrollY == 40){
@@ -56,7 +57,6 @@
 					}
 				}
 			}
-
 		}
 	</script>
 
