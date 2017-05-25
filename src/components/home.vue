@@ -52,9 +52,8 @@
 
 			methods:{
 				backTop:function(){
-					if(scrollY == 40){
-						console.log(111)
-					}
+					javascript:scroll(0,0)
+					// document.body.scrollTop=0;
 				}
 			}
 		}
