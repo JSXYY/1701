@@ -6,7 +6,7 @@
         </div>
         <div class="h_h2">
             <h2>
-                <i></i>商品详情
+                <i></i>{{data}}
             </h2>
         </div>
         <div class="home">
@@ -19,7 +19,7 @@
             <router-link to="shopcar"></router-link>
         </div>
     </div>
-        <router-view ></router-view>
+        <router-view @mjy="handleClick"></router-view>
     <div id="footer" class="footer">
 
         <div class="ftxt">
@@ -48,14 +48,20 @@
 
 <script>
     export default{
+        data(){
+            return{
+                data:"",
+            }
+        },
         mounted(){
 
         },
 
         methods: {
-            // handleClick(data){
-            //     console.log(data);
-            // }
+            handleClick(data){
+                // console.log(data);
+                this.data=data;
+            }
         }
     }
 </script>

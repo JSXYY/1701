@@ -176,9 +176,9 @@
                // '$route.query.id': ['fetchData2']
              },
             mounted(){
-                    javascript:scroll(0,0);
-                    this.goback = true;
-                    // console.log(this.goback);
+                javascript:scroll(0,0);
+                this.goback = true;
+                this.$emit('mjy',"商品详情");
                 Indicator.open();
                 axios.get("/api/product",{
                     params: {

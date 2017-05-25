@@ -51,9 +51,9 @@
 					<div class="bottomr">
 						<span>去结算</span>
 					</div>
-					
+
 				</div>
-				
+
 		</div>
 	</template>
 
@@ -72,6 +72,7 @@
 
 //			开始执行
 			mounted(){
+				this.$emit('mjy',"购物车");
 				axios.post("/api/usercar",{username:"mujunyu"}).then(res=>{
 //			                	console.log(res.data);
 			            this.$store.state.addshopcarlist=res.data.split(",");
@@ -93,16 +94,16 @@
 					                		num:this.$store.state.addshopcarlist[nu],
 					                		img:res.data.pimg
 					                	}
-					                this.$store.state.datalist.push(indatalist);	
+					                this.$store.state.datalist.push(indatalist);
 //					                console.log('aaaa');
-					                
+
 					            	})
 							}
 						}
-			                	
-			                	
+
+
 			    });
-//传入参数，获取整个对象，处理	
+//传入参数，获取整个对象，处理
 
 
 
@@ -130,7 +131,7 @@
 
 					return sum;
 				},
- 
+
 
 			},
 			methods:{
@@ -141,7 +142,7 @@
 //			                ID:this.$store.state.addshopcarlist[it1]
 //			                }
 //			                }).then(res=>{
-//			                	
+//
 //			                console.log(res.data);
 //			                // this.datalist = res.data.data.billboards
 //			                	let indatalist={
@@ -152,7 +153,7 @@
 //			                		num:1,
 //			                		img:res.data.pimg
 //			                	}
-//			                this.$store.state.datalist.push(indatalist);	
+//			                this.$store.state.datalist.push(indatalist);
 //			            	})
 //					}
 //				},
@@ -163,22 +164,22 @@
 //					console.log(goodsid);
 					this.$store.dispatch("ADD_SHOPCAR_ACTION",num);
 //							this.$store.dispatch("todba",1);
-					
+
 				},
 				handleDelClick(index){
 					this.$store.dispatch("DEL_SHOPCAR_ACTION",index);
 //							this.$store.dispatch("todba",1);
-					
+
 				},
 				del(index){
 					this.$store.dispatch("del_goodsnum_action",index);
 //							this.$store.dispatch("todba",1);
-					
+
 				},
 				add(index){
 					this.$store.dispatch("add_goodsnum_action",index);
 //							this.$store.dispatch("todba",1);
-					
+
 				},
 
 				start(){
@@ -188,7 +189,7 @@
 //				removeTodo(index){
 //					this.$store.state.datalist.splice(index, 1);
 //							this.$store.dispatch("todba",1);
-//					
+//
 //				},
 
 			}
