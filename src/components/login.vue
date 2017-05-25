@@ -55,7 +55,10 @@
 
     <script >
         export default {
+            mounted(){
+                this.$emit('mjy',"登陆");
 
+            }
         }
     </script>
 

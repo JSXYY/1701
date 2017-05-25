@@ -19,7 +19,7 @@
 						<li v-for="(data,index) in shoplist">
 							<!--用户已经登录展示页面-->
 							<div class="left">
-								<img :src="data.img"/>
+								<a :href="'#/other/product?id='+data.id"><img :src="data.img"/></a>
 							</div>
 							<div class="left right">
 								<p>
@@ -32,7 +32,10 @@
 
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
-								<span>尺码</span><span></span><button class="del"@click="handleDelClick(index)">删除</button>
+								<button class="del"@click="handleDelClick(index)">删除</button>
+								<!--<input type="button"@click="addshopcarclick('2&08100184')"/>-->
+								<!--添加两个点击事件-->
+								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
 							</div>
 						</li>
@@ -48,7 +51,9 @@
 					<div class="bottomr">
 						<span>去结算</span>
 					</div>
+
 				</div>
+
 		</div>
 	</template>
 
@@ -67,29 +72,39 @@
 
 //			开始执行
 			mounted(){
+				this.$emit('mjy',"购物车");
+				axios.post("/api/usercar",{username:"mujunyu"}).then(res=>{
+//			                	console.log(res.data);
+			            this.$store.state.addshopcarlist=res.data.split(",");
+						for(var it1 in this.$store.state.addshopcarlist){
+							if(this.$store.state.addshopcarlist[it1]>100){
+								let nu=it1-(-1);
+								axios.get("/api/shopcar",{
+					                params: {
+					                ID:this.$store.state.addshopcarlist[it1]
+					                }
+					                }).then(res=>{
+		//			                console.log(res.data);
+					                // this.datalist = res.data.data.billboards
+					                	let indatalist={
+					                		name:res.data.pgdsename,
+					                		id:res.data.gdsid,
+					                		oldprice:res.data.saleprice,
+					                		price:res.data.hyprice,
+					                		num:this.$store.state.addshopcarlist[nu],
+					                		img:res.data.pimg
+					                	}
+					                this.$store.state.datalist.push(indatalist);
+//					                console.log('aaaa');
+
+					            	})
+							}
+						}
+
+
+			    });
 //传入参数，获取整个对象，处理
-		for(var it1 in this.$store.state.addshopcarlist){
 
-			axios.get("/api/shopcar",{
-                params: {
-                ID:this.$store.state.addshopcarlist[it1]
-                }
-                }).then(res=>{
-                	
-                console.log(res.data);
-                // this.datalist = res.data.data.billboards
-                	let indatalist={
-                		name:res.data.pgdsename,
-                		id:res.data.godsid,
-                		oldprice:res.data.saleprice,
-                		price:res.data.hyprice,
-                		num:1,
-                		img:res.data.pimg
-                	}
-                this.$store.state.datalist.push(indatalist);	
-            	})
-
-		}
 
 
 			},
@@ -120,41 +135,62 @@
 
 			},
 			methods:{
+//				askshow(){
+//					for(var it1 in this.$store.state.addshopcarlist){
+//						axios.get("/api/shopcar",{
+//			                params: {
+//			                ID:this.$store.state.addshopcarlist[it1]
+//			                }
+//			                }).then(res=>{
+//
+//			                console.log(res.data);
+//			                // this.datalist = res.data.data.billboards
+//			                	let indatalist={
+//			                		name:res.data.pgdsename,
+//			                		id:res.data.godsid,
+//			                		oldprice:res.data.saleprice,
+//			                		price:res.data.hyprice,
+//			                		num:1,
+//			                		img:res.data.pimg
+//			                	}
+//			                this.$store.state.datalist.push(indatalist);
+//			            	})
+//					}
+//				},
+				//点击加入购物车要把购物车列表添加到数据库，点击删除，要把购物车列表返回给数据库
+//				ADD_SHOPCAR_ACTION
+				addshopcarclick(num){
+					//点击添加按钮不只是要更新
+//					console.log(goodsid);
+					this.$store.dispatch("ADD_SHOPCAR_ACTION",num);
+//							this.$store.dispatch("todba",1);
+
+				},
 				handleDelClick(index){
 					this.$store.dispatch("DEL_SHOPCAR_ACTION",index);
+//							this.$store.dispatch("todba",1);
+
 				},
 				del(index){
 					this.$store.dispatch("del_goodsnum_action",index);
+//							this.$store.dispatch("todba",1);
+
 				},
 				add(index){
 					this.$store.dispatch("add_goodsnum_action",index);
+//							this.$store.dispatch("todba",1);
+
 				},
 
 				start(){
 			//	判断是否登录，如果登录
 			//
 				},
-				removeTodo(index){
-					this.$store.state.datalist.splice(index, 1);
-				},
-				handleClickadd(id){
-//					增加数据
-					// console.log(id);
-//					router.push(`/detail/${id}`); //es6的字符串模板
-				},
-				loadMore(){
-
-				},
-				request(){
-					axios.get("",{
-						params:{
-//							请求数据
-
-						}
-					}).then(res=>{
-
-					})
-				}
+//				removeTodo(index){
+//					this.$store.state.datalist.splice(index, 1);
+//							this.$store.dispatch("todba",1);
+//
+//				},
 
 			}
 

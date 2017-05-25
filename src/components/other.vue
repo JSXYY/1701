@@ -6,7 +6,7 @@
         </div>
         <div class="h_h2">
             <h2>
-                <i></i>商品详情
+                <i></i>{{data}}
             </h2>
         </div>
         <div class="home">
@@ -19,9 +19,7 @@
             <router-link to="shopcar"></router-link>
         </div>
     </div>
-    <keep-alive>
-        <router-view></router-view>
-    </keep-alive>
+        <router-view @mjy="handleClick"></router-view>
     <div id="footer" class="footer">
 
         <div class="ftxt">
@@ -33,8 +31,8 @@
                     注册
                 </a>
             </span>
-            <span class="top">
-                <a href="#">
+            <span class="top" >
+                <a href="javascript:scroll(0,0)">
                     回到顶部
                 </a>
             </span>
@@ -49,7 +47,23 @@
 </template>
 
 <script>
+    export default{
+        data(){
+            return{
+                data:"",
+            }
+        },
+        mounted(){
 
+        },
+
+        methods: {
+            handleClick(data){
+                // console.log(data);
+                this.data=data;
+            }
+        }
+    }
 </script>
 
 <style scoped>

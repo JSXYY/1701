@@ -52,8 +52,8 @@ module.exports = {
             //配置服务器
         proxy:{
            '/api/*': {
-                  target: 'http://localhost:3000',
-                  host: 'localhost:3000',
+                  target: 'http://10.30.154.160:3000',
+                  host: '10.30.154.160:3000',
                   changeOrigin:true
               }
         }

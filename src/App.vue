@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-   <keep-alive>
     <router-view></router-view>
-  </keep-alive>
   </div>
 </template>
 
@@ -36,5 +34,7 @@ em, address {
 	#app{
 		height: 100%;
 	}
-
+  .mint-indicator{
+    font-size: 15px
+  }
 </style>
