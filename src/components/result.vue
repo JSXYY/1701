@@ -13,7 +13,7 @@
         <div class="m_plist">
             <div class="mp_sort">
                 <div class="mps_con">
-                    <div class="mpsc_txt">
+                    <div class="mpsc_txt"  v-if="isShow">
                         <a href="javascript:void(0)" @click="sort(4)" attr="4" :class="[this.order=='4'?'cur':'']">
                             上架时间
                         </a>
@@ -29,7 +29,7 @@
             <div class="mp_list">
 
 
-                <a class="pmpic" v-for="data in this.pics" :href="[data.pmurl=='#'?'1':'#other/product'+data.pmurl.substring(data.pmurl.lastIndexOf('?'))]" >
+                <a class="pmpic" v-for="data in this.pics" @click="handleUrl(data)" >
                     <img :src="data.pmpic ">
                 </a>
 
@@ -69,7 +69,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="m_page">
+                <div class="m_page"  v-if="isShow">
                     <div class="mp_cell s">
                         <a attr="012,,,4,1,,,0" @click="first"  href="javascript:void(0)">
                             首页
@@ -128,7 +128,7 @@
             if(this.$route.params.id=="3934"){
                 axios.get("/api/getpagespg").then(res=>{
                     this.pics = res.data.pics;
-                    console.log(this.pics );
+                    // console.log(this.pics );
                     // console.log(res.data.products);
                     // this.datalist = res.data.data.billboards
                     Indicator.close();
@@ -166,12 +166,15 @@
                 pagenow:'1',
                 order:"4",
                 pics:[],
+                isShow:true,
             }
         },
 
         methods:{
                 fetchData: function(){
-                    if(this.$route.params.id){
+                    this.isShow=true;
+                    this.pics=[];
+                    if(this.$route.params.id!=3934){
                         Indicator.open();
                         axios.get("/api/result",{
                             params: {
@@ -187,6 +190,18 @@
                             Indicator.close();
                         })
                         // console.log(1)
+                    }else{
+                        this.products=[];
+                        this.rcklist =[];
+                        this.isShow=false;
+                        Indicator.open();
+                        axios.get("/api/getpagespg").then(res=>{
+                            this.pics = res.data.pics;
+                            // console.log(this.pics );
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                            Indicator.close();
+                        })
                     }
                 },
                 rcklistloading(data){
@@ -206,6 +221,23 @@
                         Indicator.close();
 
                     })
+                },
+                handleUrl(data){
+                    if(data.pmurl=='#'){
+                    // console.log(1);
+                        return
+                    }else if(data.pmurl.lastIndexOf('shopview')!=-1){
+                    // console.log(2);
+                        return
+                    }else{
+                        if(data.pmurl.lastIndexOf('@')!=-1){
+                    // console.log(3);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?'),data.pmurl.lastIndexOf('@')))
+                        }else{
+                    // console.log(4);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?')))
+                        }
+                    }
                 },
                 goback(){
 

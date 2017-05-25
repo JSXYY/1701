@@ -49,16 +49,6 @@
 
 	<script>
 		export default{
-<<<<<<< HEAD
-			mounted(){
-				/*window.onscroll = function(){
-					console.log(111)
-				}*/
-=======
-			methods:{
-
->>>>>>> f2c6d1545777a09a412f23ca807d07f7d0a1bc3d
-			}
 		}
 	</script>
 
