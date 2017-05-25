@@ -33,7 +33,7 @@
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<button class="del"@click="handleDelClick(index)">删除</button>
-								<input type="button"@click="addshopcarclick('2&08100184')"/>
+								<!--<input type="button"@click="addshopcarclick('2&08100184')"/>-->
 								<!--添加两个点击事件-->
 								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
@@ -96,8 +96,6 @@
 					                this.$store.state.datalist.push(indatalist);	
 //					                console.log('aaaa');
 					                
-					                
-					               
 					            	})
 							}
 						}
