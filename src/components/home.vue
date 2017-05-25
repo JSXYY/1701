@@ -37,7 +37,7 @@
 				<div class="user">
 					<a href="#other/login">请登录</a>
 					<a href="#other/reg">注册</a>
-					<a>回到顶部</a>
+					<a @click="backTop">回到顶部</a>
 				</div>
 				<div class="top">
 					客服热线:400-108-5518(工作日9:00-18:00)<br />
@@ -49,8 +49,12 @@
 
 	<script>
 		export default{
-			methods:{
 
+			methods:{
+				backTop:function(){
+					javascript:scroll(0,0)
+					// document.body.scrollTop=0;
+				}
 			}
 		}
 	</script>
@@ -127,7 +131,7 @@
 			text-decoration: none;
 			color: white;
 		}
-			.footer{
+		.footer{
 			height: 1.2rem;
 			margin-bottom: 0.6rem;
 			background: #ececec;

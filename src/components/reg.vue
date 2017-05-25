@@ -63,7 +63,10 @@
 
     <script >
         export default {
+            mounted(){
+                this.$emit('mjy',"注册");
 
+            }
         }
     </script>
 

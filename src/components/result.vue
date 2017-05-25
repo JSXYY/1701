@@ -13,7 +13,7 @@
         <div class="m_plist">
             <div class="mp_sort">
                 <div class="mps_con">
-                    <div class="mpsc_txt">
+                    <div class="mpsc_txt"  v-if="isShow">
                         <a href="javascript:void(0)" @click="sort(4)" attr="4" :class="[this.order=='4'?'cur':'']">
                             上架时间
                         </a>
@@ -27,6 +27,13 @@
                 </div>
             </div>
             <div class="mp_list">
+
+
+                <a class="pmpic" v-for="data in this.pics" @click="handleUrl(data)" >
+                    <img :src="data.pmpic ">
+                </a>
+
+
                 <ul>
                     <li v-for="(data,index) in this.products">
                         <div :class='[index%2=="0"?"iteml":"itemr2"]'>
@@ -62,7 +69,7 @@
                         </div>
                     </li>
                 </ul>
-                <div class="m_page">
+                <div class="m_page"  v-if="isShow">
                     <div class="mp_cell s">
                         <a attr="012,,,4,1,,,0" @click="first"  href="javascript:void(0)">
                             首页
@@ -102,6 +109,7 @@
 
 <script >
     import axios from "axios";
+    import { Indicator } from 'mint-ui';
     // import Swiper from "swiper";
     // console.log(Swiper);
     // import "swiper/dist/css/swiper.css"; //单独引入swiper css文件
@@ -116,18 +124,31 @@
             //     console.log(res);
             //     // this.datalist = res.data.data.billboards
             // })
-            axios.get("/api/result",{
-                params: {
-                ID:[this.pagenow,this.$route.params.id,this.order]
+            Indicator.open();
+            if(this.$route.params.id=="3934"){
+                axios.get("/api/getpagespg").then(res=>{
+                    this.pics = res.data.pics;
+                    // console.log(this.pics );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
+            }else{
+
+                axios.get("/api/result",{
+                    params: {
+                    ID:[this.pagenow,this.$route.params.id,this.order]
+                    }
+                    }).then(res=>{
+                    this.rcklist = res.data.rcklist;
+                    this.products = res.data.products;
+                    this.page = Math.ceil(res.data.page_total / res.data.products.length);
+                    // console.log(this.page );
+                    // console.log(res.data.products);
+                    // this.datalist = res.data.data.billboards
+                    Indicator.close();
+                })
                 }
-                }).then(res=>{
-                this.rcklist = res.data.rcklist;
-                this.products = res.data.products;
-                this.page = Math.ceil(res.data.page_total / res.data.products.length);
-                // console.log(this.page );
-                // console.log(res.data.products);
-                // this.datalist = res.data.data.billboards
-            })
             // axios.get("/v4/api/film/now-playing?&page=1&count=5").then(res=>{
             //     console.log(res.data);
             //     this.playinglist=res.data.data.films;
@@ -143,13 +164,18 @@
                 page:'',
                 select:"",
                 pagenow:'1',
-                order:"4"
+                order:"4",
+                pics:[],
+                isShow:true,
             }
         },
 
         methods:{
                 fetchData: function(){
-                    if(this.$route.params.id){
+                    this.isShow=true;
+                    this.pics=[];
+                    if(this.$route.params.id!=3934){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
@@ -161,13 +187,27 @@
                             // console.log(res.data.rcklist);
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
                         })
                         // console.log(1)
+                    }else{
+                        this.products=[];
+                        this.rcklist =[];
+                        this.isShow=false;
+                        Indicator.open();
+                        axios.get("/api/getpagespg").then(res=>{
+                            this.pics = res.data.pics;
+                            // console.log(this.pics );
+                            // console.log(res.data.products);
+                            // this.datalist = res.data.data.billboards
+                            Indicator.close();
+                        })
                     }
                 },
                 rcklistloading(data){
                     this.back.push(data);
                     // console.log(this.back);
+                    Indicator.open();
                     axios.get("/api/result",{
                         params: {
                         ID:[this.pagenow,data,this.order]
@@ -178,13 +218,34 @@
                         // console.log(res.data.rcklist);
                         // console.log(res.data.products);
                         // this.datalist = res.data.data.billboards
+                        Indicator.close();
+
                     })
                 },
+                handleUrl(data){
+                    if(data.pmurl=='#'){
+                    // console.log(1);
+                        return
+                    }else if(data.pmurl.lastIndexOf('shopview')!=-1){
+                    // console.log(2);
+                        return
+                    }else{
+                        if(data.pmurl.lastIndexOf('@')!=-1){
+                    // console.log(3);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?'),data.pmurl.lastIndexOf('@')))
+                        }else{
+                    // console.log(4);
+                            window.location.assign('#other/product'+data.pmurl.slice(data.pmurl.lastIndexOf('?')))
+                        }
+                    }
+                },
                 goback(){
+
                     this.back.pop();
                     var id = this.back[this.back.length-1];
                     // console.log(id);
                     if(id){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,id,this.order]
@@ -195,10 +256,12 @@
                             // console.log(res.data.rcklist);
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
                         })
                     }
                 },
                 load(){
+                        Indicator.open();
                         axios.get("/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
@@ -210,10 +273,12 @@
                             // console.log(this.page );
                             // console.log(res.data.products);
                             // this.datalist = res.data.data.billboards
+                            Indicator.close();
+
                         })
                 },
                 next(){
-                    console.log(1);
+                    // console.log(1);
                     $(".l").css("display","block");
                     if(this.pagenow<this.page){
                         this.pagenow++;
@@ -240,7 +305,7 @@
                     this.load();
                 },
                 sort(data){
-                    console.log(data);
+                    // console.log(data);
                     this.order=data;
                     this.load();
                 }
@@ -268,7 +333,7 @@
     }
 </script>
 
-<style  scoped>
+<style >
 
     .main {
         min-height: 300px;
@@ -277,6 +342,9 @@
         min-width: 320px;
         margin: 0 auto;
         font-size: 30px;
+    }
+    .pmpic img {
+        width: 100%;
     }
 
     .choose_con {

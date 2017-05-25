@@ -1,5 +1,7 @@
     <template>
-        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
+        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
+        infinite-scroll-immediate-check ="false"
+        infinite-scroll-distance="0">
             <div class="p_item">
                 <div class="pi_img">
 
@@ -7,7 +9,7 @@
                         <swipe class="my-swipe" :show-indicators="false">
                           <swipe-item v-for="data in this.data.gimgitems"><img :src="data.gimgitem "></swipe-item>
                         </swipe>
-                        <div class="page-nub">
+                        <!-- <div class="page-nub">
                             <em id="slide-nub" class="fz18">
                                 4
                             </em>
@@ -17,7 +19,7 @@
                             <em id="slide-sum" class="fz12">
                                 {{bannerlength}}
                             </em>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <h1>
@@ -145,7 +147,7 @@
     <script >
         import Vue from "vue";
         import axios from "axios";
-        // import infiniteScroll from 'vue-infinite-scroll';
+        import { Indicator } from 'mint-ui';
         import { Swipe, SwipeItem } from 'vue-swipe';
         import "vue-swipe/dist/vue-swipe.css";
         // Vue.use(infiniteScroll);
@@ -166,14 +168,18 @@
                     getgdsdetail:"",
                     num:"1",
                     bannerlength:'',
-
+                    goback:true,
                 }
             },
             watch: {
                // 如果路由有变化，会再次执行该方法
-               '$route.query.id': ['fetchData2','loadMore']
+               // '$route.query.id': ['fetchData2']
              },
             mounted(){
+                javascript:scroll(0,0);
+                this.goback = true;
+                this.$emit('mjy',"商品详情");
+                Indicator.open();
                 axios.get("/api/product",{
                     params: {
                     ID:this.$route.query.id
@@ -184,8 +190,9 @@
                     this.bannerlength = res.data.gimgitems.length;
                     // this.products = res.data.products;
                     // console.log(res.data.coms.length);
-                    // console.log(res.data.products);
+                    // console.log(this.data);
                     // this.datalist = res.data.data.billboards
+                    Indicator.close();
                 })
             },
             methods: {
@@ -194,38 +201,51 @@
                     this.$store.dispatch("ADD_SHOPCAR_ACTION",this.num+"&"+this.$route.query.id);
 
                 },
-                fetchData2: function(){
-                    if(this.$route.query.id){
-                        // console.log(this.$route.query.id);
-                    axios.get("/api/product",{
-                        params: {
-                        ID:this.$route.query.id
-                        }
-                        }).then(res=>{
-                        this.data = res.data;
-                        // console.log(this.$route.query.id);
-                        this.length = res.data.coms.length;
-                        this.bannerlength = res.data.gimgitems.length;
-                        // this.products = res.data.products;
-                        // console.log(res.data.coms.length);
-                        // console.log(res.data.products);
-                        // this.datalist = res.data.data.billboards
-                    })
-                    }
-                },
+                // fetchData2: function(){
+                //     javascript:scroll(0,0);
+                //     console.log(1);
+                //     if(this.$route.query.id){
+                //         // console.log(this.$route.query.id);
+                //     Indicator.open();
+                //     axios.get("/api/product",{
+                //         params: {
+                //         ID:this.$route.query.id
+                //         }
+                //         }).then(res=>{
+                //         this.data = res.data;
+                //         // console.log(this.$route.query.id);
+                //         this.length = res.data.coms.length;
+                //         this.bannerlength = res.data.gimgitems.length;
+                //         // this.products = res.data.products;
+                //         // console.log(res.data.coms.length);
+                //         // console.log(res.data.products);
+                //         // this.datalist = res.data.data.billboards
+                //         // Indicator.close();
+                //     })
+                //     }
+                // },
                 loadMore(){
-                    // console.log(1);
+                    // console.log(2);
+                    // console.log(this.data.gdsid)
+                    // console.log(this.goback)
+                    if(this.data.gdsid&& this.goback){
+                    // console.log(this.data.gdsid)
                     this.loading = true;
+                    Indicator.open();
                     axios.get("/api/getgdsdetail",{
                         params: {
                         ID:this.data.gdsid
                         }
                         }).then(res=>{
+                        // console.log(this.goback);
+                        this.goback = false;
                         this.getgdsdetail = res.data.gdsdetail ;
                         // console.log(res.data.gdsdetail);
                         // this.datalist = res.data.data.billboards
+                        Indicator.close();
+                        this.loading = false;
                     })
-                    this.loading = false;
+                    }
 
                     // if(this.num>this.total){
                     //     //所有数据请求完成
@@ -262,12 +282,16 @@
             },
             computed: {
                 discount(){
-                    return (this.data.hyprice/this.data.saleprice).toFixed(2)*10
+                   var num = this.data.hyprice/this.data.saleprice*10;
+                    // console.log();
+                    // return ().toFixed(2)*10
+                    return num.toFixed(1);
                 }
             },
-            // created (){
-            //       this.$emit('mjy',"我的");
-            // },
+            created (){
+                  // this.$emit('mjy',"我的");
+            },
+
 
         }
     </script>
