@@ -15,6 +15,9 @@ const store = new vuex.Store({
 //(function(){
 //	this.state.datalist=['08100299','3','01207353','2'];
 //});
+//mounted(){
+//	console.log('hello');
+//},
 	state:{
 
 		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
