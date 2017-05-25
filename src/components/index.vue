@@ -1,5 +1,9 @@
 <template>
-	<div class="main">
+	<div class="main"
+		 v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
+        infinite-scroll-immediate-check ="false"
+        infinite-scroll-distance="100"
+	>
 				<div class="swiper-container">
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(data,index) in swiperList"
@@ -52,9 +56,9 @@
 					</div>
 					<div class="newlist" style="margin-top:8px">
 						<div class="listimg" v-for="data in tjList"  @click = "handelClick(data)">
-							
+								<a>
 								<img :src="data.pmpic" style="height:100%;width:100%"/>
-							
+								</a>
 							<h4>{{data.pmtitle}}</h4>
 						</div>
 					</div>
@@ -64,16 +68,12 @@
 						<p>创意爆款</p>
 					</div>
 					<div class="host_list">
-						<div v-for="data in hostList"  @click = "handelClick(data)"
-							v-infinite-scroll="loadMore"
-  							infinite-scroll-disabled="loading"
-  							infinite-scroll-distance="50"
-						>
-							<a href="#">
-								<img :src="data.p_img" style="height:100%;width:100%">
+						<div v-for="(data,index) in hostList"  @click = "handelClick(data)">
+							<a>
+								<img :src="hostSrc[index]"style="height:100%;width:100%">
 							</a>
-							<p class="host_p1">{{data.p_gdsname}}</p>
-							<p class="host_p2">{{data.p_saleprice}}</p>
+							<p class="host_p1">{{data.p_title}}</p>
+							<p class="host_p2">{{data.p_ename}}</p>
 							<p class="host_p3">￥{{data.p_mprice}}</p>
 						</div>
 					</div>
@@ -81,6 +81,7 @@
 			</div>
 </template>
 <script>
+	import { Indicator } from 'mint-ui';
 	import { InfiniteScroll } from 'mint-ui';
 	import Vue from "vue";
 	Vue.use(InfiniteScroll);
@@ -93,7 +94,11 @@
 					swiperList:[],
 					originalityList:[],
 					tjList:[],
-					hostList:[]
+					hostList:[],
+					num:1,
+					hostSrc:[],
+					isLoad:true,
+					loading:false,
 				}
 			},
 			methods:{
@@ -101,43 +106,66 @@
 					var urlStr = a.pmurl;
 					var subUrl = "";
 					var resultUrl = "";
-					if (urlStr.indexOf("rackcode") != -1) {
-						
+					if(a.p_gdsid){
+
+						window.location.assign("#/other/product?id=" + a.p_gdsid)
+					}else{
+						if (urlStr.indexOf("rackcode") != -1) {
 						subUrl = urlStr.substring(urlStr.indexOf("rackcode"));
 						var resultUrl =subUrl.substring(subUrl.indexOf("=") + 1);
 						window.location.assign("#/home/result/" + resultUrl)
 
-					}else if (urlStr.indexOf("shopview") != -1) {
-						subUrl = urlStr.substring(urlStr.indexOf("shopview"));
-						resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1))
+						}else if (urlStr.indexOf("shopview") != -1) {
+							subUrl = urlStr.substring(urlStr.indexOf("shopview"));
+							resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1))
 
-					}else if(urlStr.indexOf("product") != -1) {
-						subUrl = urlStr.substring(urlStr.indexOf("product"));
-						resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1));
-						window.location.assign("#/other/product" + resultUrl)
+						}else if(urlStr.indexOf("product") != -1) {
+							subUrl = urlStr.substring(urlStr.indexOf("product"));
+							resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1));
+							window.location.assign("#/other/product" + resultUrl)
+
+						}
 
 					}
-					console.log(resultUrl)
 				},
-				loadMore() {
-					  this.loading = true;
-					  setTimeout(() => {
-					    let last = this.hostList[this.hostList.length - 1];
-					    for (let i = 1; i <= 10; i++) {
-					      this.hostList.push(last + i);
-					    }
-					    this.loading = false;
-					  }, 2500);
+				loadMore:function(){
+					if(this.isLoad){
+						this.loading = true;
+						Indicator.open();
+						axios.get("/api/loading",{
+		                    params: {
+		                    	ID:this.num
+		                    }
+		                    }).then(res=>{
+		                    	
+		                   	this.hostList = [...this.hostList,...res.data.products];
+		                   	for(var i = (this.num-1)*8; i < this.hostList.length; i++){
+		                   		this.hostSrc.push("http://m.d1.cn" + this.hostList[i].p_img) 
+		                   	}
+		                    this.num++
+		                    Indicator.close();
+		                    this.loading = false;
+	               			}).catch(err=>{
+	               				this.isLoad = false;
+	               			 	Indicator.close();
+		                   	// console.log(this.hostSrc)
+	               			 	
+	               		})
+	               	}
+
 				}
 			},
 			mounted(){
+				Indicator.open();
 				axios.get("api/home").then(res=>{
-					console.log(res);
+					
 					this.swiperList = res.data.lblist;
 					this.originalityList = res.data.pmlist;
 					this.tjList = res.data.tjlist;
-					this.hostList = res.data.plistsyc
+					/*this.hostList = res.data.plistsyc*/
+					Indicator.close();
 				})
+
 			},
 			directives:{
 				"swiperList":{
@@ -231,6 +259,9 @@
 		}
 		.listimg h4{
 			text-align: center;
+			font-size: 0.14rem;
+			color: #000;
+			font-weight:600
 		}
 		.host_list{
 			width: 3.44rem;
@@ -256,6 +287,7 @@
 			font-size: 0.12rem;
 			height: 0.4rem;
 			color: #2b2b2b;
+			line-height: 0.18rem
 		}
 		.host_p2{
 			font-size: 0.12rem;
