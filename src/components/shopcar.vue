@@ -64,8 +64,11 @@
 			data(){
 				return {
 					isLog:true,
-					checkedValue:this.$store.state.datalist,
+//					checkedValue:this.$store.state.datalist,
+					username:'',
+					userpassword:""
 				}
+				
 			},
 			watch:{
 			},
@@ -108,6 +111,9 @@
 
 			},
 			computed:{
+//				login(){
+////					axios.post('',{username:this.username})
+//				}
 				shoplist(){
 					return this.$store.state.datalist; //拿到状态数据
 				},
