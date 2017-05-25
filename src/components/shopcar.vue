@@ -33,7 +33,7 @@
 								</p style="margin-top: 5px;    line-height: .26rem;">
 								<!--<span>尺码</span><span></span><button class="del"@click="removeTodo(index)">删除</button>-->
 								<button class="del"@click="handleDelClick(index)">删除</button>
-								<input type="button"@click="addshopcarclick('2&08100184')"/>
+								<!--<input type="button"@click="addshopcarclick('2&08100184')"/>-->
 								<!--添加两个点击事件-->
 								<!--<input type="button"@click="addshopcarclick('01207252'),askshow()"/>-->
 
@@ -94,6 +94,8 @@
 					                		img:res.data.pimg
 					                	}
 					                this.$store.state.datalist.push(indatalist);	
+//					                console.log('aaaa');
+					                
 					            	})
 							}
 						}
@@ -154,35 +156,41 @@
 //			            	})
 //					}
 //				},
+				//点击加入购物车要把购物车列表添加到数据库，点击删除，要把购物车列表返回给数据库
 //				ADD_SHOPCAR_ACTION
 				addshopcarclick(num){
 					//点击添加按钮不只是要更新
 //					console.log(goodsid);
 					this.$store.dispatch("ADD_SHOPCAR_ACTION",num);
+//							this.$store.dispatch("todba",1);
 					
 				},
 				handleDelClick(index){
 					this.$store.dispatch("DEL_SHOPCAR_ACTION",index);
+//							this.$store.dispatch("todba",1);
+					
 				},
 				del(index){
 					this.$store.dispatch("del_goodsnum_action",index);
+//							this.$store.dispatch("todba",1);
+					
 				},
 				add(index){
 					this.$store.dispatch("add_goodsnum_action",index);
+//							this.$store.dispatch("todba",1);
+					
 				},
 
 				start(){
 			//	判断是否登录，如果登录
 			//
 				},
-				removeTodo(index){
-					this.$store.state.datalist.splice(index, 1);
-				},
-				handleClickadd(id){
-//					增加数据
-					// console.log(id);
-//					router.push(`/detail/${id}`); //es6的字符串模板
-				},
+//				removeTodo(index){
+//					this.$store.state.datalist.splice(index, 1);
+//							this.$store.dispatch("todba",1);
+//					
+//				},
+
 			}
 
 		}

@@ -15,12 +15,15 @@ const store = new vuex.Store({
 //(function(){
 //	this.state.datalist=['08100299','3','01207353','2'];
 //});
+//mounted(){
+//	console.log('hello');
+//},
 	state:{
 
 		//用于购物车页面展示,点击结算将把其中的id和num发送给服务器
 		datalist:[],
 		//下面这个只存储商品id，这是从服务器查找到的
-		addshopcarlist:[],
+		addshopcarlist:[]
 //		func:(function(){
 //			console.log(this.state.addshopcarlist);
 //		})()
@@ -40,6 +43,7 @@ const store = new vuex.Store({
 //			console.log(arguments[1]);
 			all1=num.split("&")
 			store.commit("ADD_SHOPCAR_MUTATION",all1);
+			store.commit('todb',payload);
 		},
 
 		"DEL_SHOPCAR_ACTION":function(store,payload){
@@ -48,15 +52,22 @@ const store = new vuex.Store({
 			//通过commit 方法把数据提交给mutations
 			//
 			store.commit("DEL_SHOPCAR_MUTATION",payload);
+			store.commit('todb',payload);
 		},
 		"add_goodsnum_action":function(store,payload){
 			store.commit("add_goodsnum_mutation",payload);
+			store.commit('todb',payload);
 
 		},
 		"del_goodsnum_action":function(store,payload){
 			store.commit("del_goodsnum_mutation",payload);
+			store.commit('todb',payload);
 
-		}
+		},
+		'todba':function(store,payload){
+			store.commit('todb',payload);
+		},
+		
 	},
 
 	mutations:{
@@ -166,10 +177,20 @@ const store = new vuex.Store({
 			if(state.addshopcarlist[n]<0){
 				state.addshopcarlist[n]=0;
 			} 
-			
-		
-
-		}
+		},
+		//返回给数据库
+		'todb':function(state,payload){
+			axios.post("/api/shopcar",{
+			                username:"mujunyu",
+			                shopcar:state.addshopcarlist
+			                
+			                }).then(res=>{
+//			                	console.log('成功提交给数据库');
+//			                	console.log(res.config.data);.shopcar.split(",")
+//			                	state.addshopcarlist=JSON.parse(res.config.data).shopcar;
+//			                	console.log(state.addshopcarlist);
+			                })
+		},
 	}
 })
 
