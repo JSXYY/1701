@@ -120,7 +120,6 @@
 <style scoped>
 		.swiper-wrapper{
 			height: 1.82rem;
-			background: red
 		}
 		.swiper-container{
 			margin-top: 0.08rem;
@@ -175,7 +174,6 @@
 			height: 0.92rem;
 			list-style: none;
 			margin: 0.017rem;
-			background: red;
 			display: inline-block;
 		}
 		.mp_list_sg{
@@ -189,7 +187,6 @@
 		.listimg a{
 			display: block;
 			height: 1.5rem;
-			background: red;
 		}
 		.listimg h4{
 			text-align: center;

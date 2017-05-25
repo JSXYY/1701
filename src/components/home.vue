@@ -22,7 +22,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="nav">
+			<div class="nav" id="nav">
 				<ul>
 					<router-link to="/home/index" tag="li" active-class="active"><a>首页</a></router-link>
 					<router-link to="/home/result/012" tag="li" active-class="active"><a>家居</a></router-link>
@@ -129,7 +129,7 @@
 			text-decoration: none;
 			color: white;
 		}
-			.footer{
+		.footer{
 			height: 1.2rem;
 			margin-bottom: 0.6rem;
 			background: #ececec;
