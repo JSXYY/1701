@@ -5,13 +5,27 @@
 </template>
 
 <script>
+
+import axios from "axios"
+
+import router from "./router"
+
 export default {
 
   data () {
     return {
-
+				
     }
-  }
+  },
+  	mounted(){
+  		axios.post("/api/session").then(res=>{
+  			if(res.data == "yes"){
+  					router.push("/other/shopcar")	
+  			}else{
+  					router.push("/other/login")
+  			}
+  		})
+  	}
 }
 </script>
 
