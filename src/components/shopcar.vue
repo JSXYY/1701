@@ -63,7 +63,7 @@
 
 			data(){
 				return {
-					isLog:true,
+					isLog:false,
 //					checkedValue:this.$store.state.datalist,
 					username:'',
 //					userpassword:"",
@@ -74,14 +74,17 @@
 			},
 
 //			开始执行
-			mounted(){
-				this.$emit('mjy',"购物车");
-//				console.log(this.shopcarsuccess);
-if(localStorage.username){
+			mounted(){   
+			this.$emit('mjy',"购物车");
+			console.log(localStorage.username);
+//			console.log(this.$store.state.addshopcarlist);
+			
+//			this.$store.state.addshopcarlist
+			if(localStorage.username){
 	//存在用户名
-				isLog=true;
+				this.isLog=true;
 
-				if(this.$store.state.shopcarsuccess){
+//				if(this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
 					axios.post("/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
@@ -113,8 +116,9 @@ if(localStorage.username){
 	
 	
 				    });
-				    this.$store.state.shopcarsuccess=false;
-				}
+//				    this.$store.state.shopcarsuccess=false;
+//				    this.isLog=this.$store.state.shopcarsuccess;
+				
 }
 
 //传入参数，获取整个对象，处理
