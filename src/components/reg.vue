@@ -92,16 +92,14 @@
       					}
       				})
       			}
-      		}
+      		},
       		
-      	
-      	}
-        export default {
-            mounted(){
+	      	mounted(){
                 this.$emit('mjy',"注册");
-
+	
             }
-        }
+      	}
+    
     </script>
 
 
