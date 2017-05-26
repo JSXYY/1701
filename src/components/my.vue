@@ -121,29 +121,29 @@
 
     <script >
         export default {
-            mounted(){
-                document.addEventListener('deviceready', onDeviceReady, false);
+            // mounted(){
+            //     document.addEventListener('deviceready', onDeviceReady, false);
 
-                function onDeviceReady(){
-                    var i = $('.um_top').find("i");
-                        console.log(2);
-                    i.click(function(){
-                        navigator.camera.getPicture(onSuccess, onFail, {
-                            quality: 50,
-                            sourceType : Camera.PictureSourceType.PHOTOLIBRARY ,
-                            allowEdit : true,
-                         });
+            //     function onDeviceReady(){
+            //         var i = $('.um_top').find("i");
+            //             console.log(2);
+            //         i.click(function(){
+            //             navigator.camera.getPicture(onSuccess, onFail, {
+            //                 quality: 50,
+            //                 sourceType : Camera.PictureSourceType.PHOTOLIBRARY ,
+            //                 allowEdit : true,
+            //              });
 
-                        function onSuccess(imageData) {
-                           console.log(imageData);
-                        }
+            //             function onSuccess(imageData) {
+            //                console.log(imageData);
+            //             }
 
-                        function onFail(message) {
-                           alert('Failed because: ' + message);
-                        }
-                    })
-                }
-            }
+            //             function onFail(message) {
+            //                alert('Failed because: ' + message);
+            //             }
+            //         })
+            //     }
+            // }
         }
     </script>
 
