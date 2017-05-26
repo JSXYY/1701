@@ -84,7 +84,7 @@
 	//存在用户名
 				this.isLog=true;
 
-//				if(this.$store.state.shopcarsuccess){
+				if(!this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
 					axios.post("/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
@@ -116,9 +116,9 @@
 	
 	
 				    });
-//				    this.$store.state.shopcarsuccess=false;
+				    this.$store.state.shopcarsuccess=true;
 //				    this.isLog=this.$store.state.shopcarsuccess;
-				
+				}
 }
 
 //传入参数，获取整个对象，处理
