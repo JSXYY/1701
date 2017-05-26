@@ -54,12 +54,12 @@
     </template>
 
     <script >
-    	
+
     	import axios from "axios"
-        
+
         import router from "../router"
 
-        
+
         export default {
 			data(){
 				return{
@@ -75,21 +75,20 @@
 					}).then(res=>{
 						console.log(res.data)
 						if(res.data){
-							router.push("/other/shopcar")	
+							router.push("/other/shopcar")
 						}else{
 							alert("该用户未注册")
 							router.push("/other/reg")
 						}
 					})
 				}
-			}
-        export default {
+			},
             mounted(){
                 this.$emit('mjy',"登陆");
 
             }
 
-        }
+    }
     </script>
 
 

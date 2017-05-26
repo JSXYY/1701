@@ -59,17 +59,17 @@
 
 			<div class="reg_msg" id="regmsg" style="display: none;">
 		</div>
-			</form>	
+			</form>
        </div>
     </template>
 
     <script >
 
-    	
+
     	import axios from "axios"
-    	
+
       	import router from "../router"
-      	
+
       	export default{
       		data(){
       			return{
@@ -92,11 +92,8 @@
       					}
       				})
       			}
-      		}
-      		
-      	
-      	}
-        export default {
+      		},
+
             mounted(){
                 this.$emit('mjy',"注册");
 
