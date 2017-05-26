@@ -77,7 +77,7 @@
 						localStorage.username='';
 						this.$store.state.datalist=[];
 						this.$store.state.addshopcarlist=[];
-						this.$store.state.shopcarsuccess=true;
+						this.$store.state.shopcarsuccess=false;
 						
 						localStorage.username=res.data.username;
 //						console.log(localStorage.username);
@@ -121,7 +121,7 @@
 	    }
 	    .main .login .login_user .htxt{
 	    	display: block;
-	    	padding: 0 0.2px 0 10px;
+	    	padding: 0 0 0 3px;
 	    	font-size: 0.14rem;
 	    	float: left;
 	    }
@@ -147,7 +147,7 @@
 	    }
 	    .main .login .login_pwd .htxt{
 	    	display: block;
-	    	padding: 0 0.2px 0 10px;
+	    	padding: 0 0 0 3px;
 	    	font-size: 0.14rem;
 	    	float: left;
 	    }

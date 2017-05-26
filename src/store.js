@@ -25,6 +25,7 @@ const store = new vuex.Store({
 		//下面这个只存储商品id，这是从服务器查找到的
 		addshopcarlist:[],
 		shopcarsuccess:false,
+		headPortrait:"http://bpic.588ku.com/element_origin_min_pic/01/37/09/22573c3a831082c.jpg"
 //		username:'',
 		
 //		func:(function(){
