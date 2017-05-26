@@ -66,7 +66,7 @@
 					isLog:true,
 //					checkedValue:this.$store.state.datalist,
 					username:'',
-					userpassword:"",
+//					userpassword:"",
 				}
 				
 			},
@@ -77,9 +77,13 @@
 			mounted(){
 				this.$emit('mjy',"购物车");
 //				console.log(this.shopcarsuccess);
+if(localStorage.username){
+	//存在用户名
+				isLog=true;
+
 				if(this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
-					axios.post("/api/usercar",{username:"mujunyu"}).then(res=>{
+					axios.post("/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
 				            this.$store.state.addshopcarlist=res.data.split(",");
 							for(var it1 in this.$store.state.addshopcarlist){
@@ -111,6 +115,8 @@
 				    });
 				    this.$store.state.shopcarsuccess=false;
 				}
+}
+
 //传入参数，获取整个对象，处理
 
 
