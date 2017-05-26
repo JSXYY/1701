@@ -1,5 +1,5 @@
 	<template>
-		<div>
+		<div id="home">
 			<div class="header">
 				<!-- <div class="logo">
 					<img src="../assets/d1_logo.png" height="100%" width="100%">
@@ -57,17 +57,22 @@
 				},
 				handleScroll:function(){
 					var a = document.getElementById("nav")
-					if(scrollY >= 40){
-						a.style.position = "fixed";
-						a.style.top= 0;
-						a.style.zIndex = 5
-					}else{
-						a.style.position= "static";
+					if(a){
+						if(scrollY >= 40){
+							a.style.position = "fixed";
+							a.style.top= 0;
+							a.style.zIndex = 5
+						}else{
+							a.style.position= "static";
+						}
 					}
+					
 				}
 			},
 			mounted(){
+
 				window.addEventListener('scroll', this.handleScroll);
+
 			}
 		}
 	</script>

@@ -1,7 +1,7 @@
 import vue from "vue";
 import vuex from "vuex";
 import axios from "axios";
-
+import api from "./api";
 vue.use(vuex);
 
 
@@ -104,7 +104,7 @@ const store = new vuex.Store({
 				state.addshopcarlist.push(num[1]);
 				state.addshopcarlist.push(num[0]);
 //				console.log(state.addshopcarlist);
-				axios.get("/api/shopcar",{
+				axios.get(api.interface+"/api/shopcar",{
 			                params: {
 			                ID:num[1]
 			                }
@@ -183,7 +183,7 @@ const store = new vuex.Store({
 		},
 		//返回给数据库
 		'todb':function(state,payload){
-			axios.post("/api/shopcar",{
+			axios.post(api.interface+"/api/shopcar",{
 			                username:localStorage.username,
 			                shopcar:state.addshopcarlist
 			                

@@ -56,7 +56,7 @@
     <script >
 
     	import axios from "axios"
-
+	import api from "../api";
         import router from "../router"
 
 
@@ -69,7 +69,7 @@
 			},
 			methods:{
 				login(){
-					axios.post("/api/login",{
+					axios.post(api.interface+"/api/login",{
 						username:this.username,
 						userpassword:this.password
 					}).then(res=>{

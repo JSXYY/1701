@@ -16,7 +16,7 @@
            <div class="main">
 				<div class="umenu">
 					<div class="um_top">
-						<i>
+						<i id="headPortrait">
 						</i>
 						<div class="txt">
 							<span id="muid">
@@ -121,29 +121,22 @@
 
     <script >
         export default {
-            // mounted(){
-            //     document.addEventListener('deviceready', onDeviceReady, false);
-
-            //     function onDeviceReady(){
-            //         var i = $('.um_top').find("i");
-            //             console.log(2);
-            //         i.click(function(){
-            //             navigator.camera.getPicture(onSuccess, onFail, {
-            //                 quality: 50,
-            //                 sourceType : Camera.PictureSourceType.PHOTOLIBRARY ,
-            //                 allowEdit : true,
-            //              });
-
-            //             function onSuccess(imageData) {
-            //                console.log(imageData);
-            //             }
-
-            //             function onFail(message) {
-            //                alert('Failed because: ' + message);
-            //             }
-            //         })
-            //     }
-            // }
+            mounted(){
+	            var i = document.getElementById("headPortrait");
+	            i.onclick=function(){
+//	            	if(this.plus){
+	            		console.log(0);
+	            		plus.gallery.pick( function(path){
+					    console.log(path);
+					    console.log(i.style.backgroundImage);
+					    i.style.backgroundImage="url("+path+")";
+						}, function ( e ) {
+						    console.log( "取消选择图片" );
+						}, {filter:"image"} );
+//	            	}
+				
+				}
+            }
         }
     </script>
 

@@ -80,6 +80,7 @@
 			</div>
 </template>
 <script>
+	import api from "../api";
 	import { Indicator } from 'mint-ui';
 	import { InfiniteScroll } from 'mint-ui';
 	import Vue from "vue";
@@ -131,7 +132,7 @@
 					if(this.isLoad){
 						this.loading = true;
 						Indicator.open();
-						axios.get("/api/loading",{
+						axios.get(api.interface+"/api/loading",{
 		                    params: {
 		                    	ID:this.num
 		                    }
@@ -156,7 +157,7 @@
 			},
 			mounted(){
 				Indicator.open();
-				axios.get("api/home").then(res=>{
+				axios.get(api.interface+"/api/home").then(res=>{
 					
 					this.swiperList = res.data.lblist;
 					this.originalityList = res.data.pmlist;

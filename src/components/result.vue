@@ -108,6 +108,7 @@
 
 
 <script >
+	import api from "../api";
     import axios from "axios";
     import { Indicator } from 'mint-ui';
     // import Swiper from "swiper";
@@ -126,7 +127,7 @@
             // })
             Indicator.open();
             if(this.$route.params.id=="3934"){
-                axios.get("/api/getpagespg").then(res=>{
+                axios.get(api.interface+"/api/getpagespg").then(res=>{
                     this.pics = res.data.pics;
                     // console.log(this.pics );
                     // console.log(res.data.products);
@@ -135,7 +136,7 @@
                 })
             }else{
 
-                axios.get("/api/result",{
+                axios.get(api.interface+"/api/result",{
                     params: {
                     ID:[this.pagenow,this.$route.params.id,this.order]
                     }
@@ -176,7 +177,7 @@
                     this.pics=[];
                     if(this.$route.params.id!=3934){
                         Indicator.open();
-                        axios.get("/api/result",{
+                        axios.get(api.interface+"/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
                             }
@@ -195,7 +196,7 @@
                         this.rcklist =[];
                         this.isShow=false;
                         Indicator.open();
-                        axios.get("/api/getpagespg").then(res=>{
+                        axios.get(api.interface+"/api/getpagespg").then(res=>{
                             this.pics = res.data.pics;
                             // console.log(this.pics );
                             // console.log(res.data.products);
@@ -208,7 +209,7 @@
                     this.back.push(data);
                     // console.log(this.back);
                     Indicator.open();
-                    axios.get("/api/result",{
+                    axios.get(api.interface+"/api/result",{
                         params: {
                         ID:[this.pagenow,data,this.order]
                         }
@@ -246,7 +247,7 @@
                     // console.log(id);
                     if(id){
                         Indicator.open();
-                        axios.get("/api/result",{
+                        axios.get(api.interface+"/api/result",{
                             params: {
                             ID:[this.pagenow,id,this.order]
                             }
@@ -262,7 +263,7 @@
                 },
                 load(){
                         Indicator.open();
-                        axios.get("/api/result",{
+                        axios.get(api.interface+"/api/result",{
                             params: {
                             ID:[this.pagenow,this.$route.params.id,this.order]
                             }
