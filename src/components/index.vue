@@ -2,8 +2,7 @@
 	<div class="main"
 		 v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
         infinite-scroll-immediate-check ="false"
-        infinite-scroll-distance="100"
-	>
+        infinite-scroll-distance="100">
 				<div class="swiper-container">
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(data,index) in swiperList"
@@ -123,10 +122,10 @@
 							subUrl = urlStr.substring(urlStr.indexOf("product"));
 							resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1));
 							window.location.assign("#/other/product" + resultUrl)
-
 						}
 
 					}
+
 				},
 				loadMore:function(){
 					if(this.isLoad){
@@ -164,7 +163,7 @@
 					this.tjList = res.data.tjlist;
 					/*this.hostList = res.data.plistsyc*/
 					Indicator.close();
-				})
+				});
 
 			},
 			directives:{

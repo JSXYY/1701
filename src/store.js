@@ -24,7 +24,8 @@ const store = new vuex.Store({
 		datalist:[],
 		//下面这个只存储商品id，这是从服务器查找到的
 		addshopcarlist:[],
-		shopcarsuccess:true
+		shopcarsuccess:false,
+//		username:'',
 		
 //		func:(function(){
 //			console.log(this.state.addshopcarlist);
@@ -183,11 +184,11 @@ const store = new vuex.Store({
 		//返回给数据库
 		'todb':function(state,payload){
 			axios.post("/api/shopcar",{
-			                username:"mujunyu",
+			                username:localStorage.username,
 			                shopcar:state.addshopcarlist
 			                
 			                }).then(res=>{
-//			                	console.log('成功提交给数据库');
+			                	console.log('成功提交给数据库');
 //			                	console.log(res.config.data);.shopcar.split(",")
 //			                	state.addshopcarlist=JSON.parse(res.config.data).shopcar;
 //			                	console.log(state.addshopcarlist);

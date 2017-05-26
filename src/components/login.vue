@@ -73,7 +73,15 @@
 						username:this.username,
 						userpassword:this.password
 					}).then(res=>{
-						console.log(res.data)
+//						console.log(res.data.username);
+						localStorage.username='';
+						this.$store.state.datalist=[];
+						this.$store.state.addshopcarlist=[];
+						this.$store.state.shopcarsuccess=true;
+						
+						localStorage.username=res.data.username;
+//						console.log(localStorage.username);
+//						this.$store.state.shopcar=res.data.shopcar;
 						if(res.data){
 							router.push("/other/shopcar")
 						}else{
