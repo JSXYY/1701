@@ -121,7 +121,29 @@
 
     <script >
         export default {
+            mounted(){
+                document.addEventListener('deviceready', onDeviceReady, false);
 
+                function onDeviceReady(){
+                    var i = $('.um_top').find("i");
+                        console.log(2);
+                    i.click(function(){
+                        navigator.camera.getPicture(onSuccess, onFail, {
+                            quality: 50,
+                            sourceType : Camera.PictureSourceType.PHOTOLIBRARY ,
+                            allowEdit : true,
+                         });
+
+                        function onSuccess(imageData) {
+                           console.log(imageData);
+                        }
+
+                        function onFail(message) {
+                           alert('Failed because: ' + message);
+                        }
+                    })
+                }
+            }
         }
     </script>
 
@@ -194,10 +216,11 @@
 }
 .main .umenu .um_top i {
     padding-left: .10rem;
-    width: .70rem;
+    width: 1.00rem;
     height: 1.00rem;
     display: block;
-    background: url(http://images.d1.com.cn/wap/2014/ubg.png) center center no-repeat;
+    background: url(../assets/22573c3a831082c.jpg)  center center no-repeat;
+    background-size: 60%
 }
 .mitem li.bg2 i {
     background: url(http://images.d1.com.cn/wap/2014/02.png) center center no-repeat;

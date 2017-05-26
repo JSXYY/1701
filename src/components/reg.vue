@@ -1,17 +1,18 @@
     <template>
         <div>
-        	<div class="main">
+        	<form action="/reg/validata" method="post">
+        		<div class="main">
 				<div class="phonecode  pd">
 					<div class="msg">
 						温馨提示：如您在电脑上已注册过D1优尚网账号可直接登陆，无需再次注册。
-						<a href="/wap/login.html" class="gologin">
+						<a class="gologin">
 							直接登陆
 						</a>
 					</div>
 					<div class="getcode">
 						<div class="ph_err">
 						</div>
-						<input name="phone" id="phone" class="phonec" type="text" placeholder="输入手机号">
+						<input name="phone" id="phone" class="phonec" type="text" placeholder="输入手机号"   v-model="phoneNum">
 						<div class="yztxt">
 							<input name="yzcode" id="yzcode" placeholder="请输入右侧图片数字" class="yzcode mgt10"
 							type="text">
@@ -35,11 +36,11 @@
 						</div>
 						<input id="backurl" name="backurl" type="hidden" value="http://m.d1.cn/wap/login.html">
 						<input name="code" id="code" class="regin mgt10" type="text" placeholder="输入短信激活码">
-						<input name="pwd" id="pwd" class="regin mgt10" type="password" placeholder="输入初始化密码（密码长度6~14位）">
+						<input name="pwd" id="pwd" class="regin mgt10" type="password" placeholder="输入初始化密码（密码长度6~14位）"  v-model="password">
 						<p>
 							支持数字、符号、字母、字母区分大小写
 						</p>
-						<a href="javascript:reg();" class="regbut">
+						<a class="regbut" @click="register()">
 							提交
 						</a>
 			</div>
@@ -57,12 +58,42 @@
         	</div>
 
 			<div class="reg_msg" id="regmsg" style="display: none;">
-	</div>
+		</div>
+			</form>
        </div>
     </template>
 
     <script >
-        export default {
+
+
+    	import axios from "axios"
+
+      	import router from "../router"
+
+      	export default{
+      		data(){
+      			return{
+      				phoneNum:"",
+      				password:""
+      			}
+      		},
+      		methods:{
+      			register(){
+      				//console.log("111")
+      				axios.post("/api/reg",{
+      					username:this.phoneNum,
+      					userpassword:this.password
+      				}).then(res=>{
+      					console.log(res)
+      					if(res.data=="创建成功"){
+      						router.push("/other/login")
+      					}else{
+      						alert("已有该用户")
+      					}
+      				})
+      			}
+      		},
+
             mounted(){
                 this.$emit('mjy',"注册");
 
@@ -95,7 +126,13 @@
     width: .95rem;
     margin-top: .05rem;
 }
-
+.main .yztxt .yzcode {
+    width: 50%;
+    height: .40rem;
+    border: 1px solid #b2b2b2;
+    line-height: .40rem;
+    display: inline-block;
+}
 .main .phonecode .msg a, .main .phonecode .getcode a, .main .phonereg .regtxt a {
     height: .38rem;
     line-height: .38rem;
@@ -105,15 +142,32 @@
     text-align: center;
     border-radius: .05rem;
 }
+.main .phonereg .regtxt a {
+	display: block;
+	width:90%;
+}
+.main .phonereg, .main .memo {
+    color: #575757;
+}
+.main .phonereg .regtxt p {
+    color: #e80017;
+    line-height: .30rem;
+}
 .main .phonecode .getcode .phonec, .main .phonereg .regtxt .regin {
     width: 90%;
     height: .40rem;
     border: 1px solid #b2b2b2;
     line-height: .40rem;
 }
+.main .phonereg .regtxt input{
+	background-color: greenyellow;
+}
 .main input {
     font-size: .14rem;
     padding-left: .08rem;
+}
+.main .mgt10 {
+    margin-top: .10rem;
 }
 .main .phonecode .getcode .butcode {
     display: block;

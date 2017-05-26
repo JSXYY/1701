@@ -7,7 +7,7 @@
     				<span class="htxt">
     					帐号：</span>
     				<span class="l_input">
-    					<input name="user" id="user" placeholder="手机号/邮箱/用户名" type="text">
+    					<input name="user" id="user" placeholder="手机号/邮箱/用户名" type="text" v-model="username">
     				</span>
     			</div>
     			<div class="login_pwd">
@@ -15,11 +15,11 @@
     					密码：
     				</span>
     				<span class="l_input">
-    					<input name="pwd" id="pwd" type="password">
+    					<input name="pwd" id="pwd" type="password" v-model="password">
     				</span>
     			</div>
     			<div class="login_but">
-    				<a href="javascript:void(0);" id="loginbut" class="loginbut">
+    				<a id="loginbut" class="loginbut" @click="login()">
     					登录
     				</a>
     				<div class="regfind">
@@ -54,12 +54,49 @@
     </template>
 
     <script >
+
+    	import axios from "axios"
+
+        import router from "../router"
+
+
         export default {
+			data(){
+				return{
+					username:"",
+					password:""
+				}
+			},
+			methods:{
+				login(){
+					axios.post("/api/login",{
+						username:this.username,
+						userpassword:this.password
+					}).then(res=>{
+//						console.log(res.data.username);
+						localStorage.username='';
+						this.$store.state.datalist=[];
+						this.$store.state.addshopcarlist=[];
+						this.$store.state.shopcarsuccess=true;
+						
+						localStorage.username=res.data.username;
+//						console.log(localStorage.username);
+//						this.$store.state.shopcar=res.data.shopcar;
+						if(res.data){
+							router.push("/other/shopcar")
+						}else{
+							alert("该用户未注册")
+							router.push("/other/reg")
+						}
+					})
+				}
+			},
             mounted(){
                 this.$emit('mjy',"登陆");
 
             }
-        }
+
+    }
     </script>
 
 
