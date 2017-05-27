@@ -59,11 +59,12 @@
 
 	<script >
 		    import axios from "axios";
+		    import api from "../api";
 		export default {
 
 			data(){
 				return {
-					isLog:true,
+					isLog:false,
 //					checkedValue:this.$store.state.datalist,
 					username:'',
 //					userpassword:"",
@@ -74,22 +75,25 @@
 			},
 
 //			开始执行
-			mounted(){
-				this.$emit('mjy',"购物车");
-//				console.log(this.shopcarsuccess);
-if(localStorage.username){
+			mounted(){   
+			this.$emit('mjy',"购物车");
+			console.log(localStorage.username);
+//			console.log(this.$store.state.addshopcarlist);
+			
+//			this.$store.state.addshopcarlist
+			if(localStorage.username){
 	//存在用户名
-				isLog=true;
+				this.isLog=true;
 
-				if(this.$store.state.shopcarsuccess){
+				if(!this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
-					axios.post("/api/usercar",{username:localStorage.username}).then(res=>{
+					axios.post(api.interface+"/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
 				            this.$store.state.addshopcarlist=res.data.split(",");
 							for(var it1 in this.$store.state.addshopcarlist){
 								if(this.$store.state.addshopcarlist[it1]>100){
 									let nu=it1-(-1);
-									axios.get("/api/shopcar",{
+									axios.get(api.interface+"/api/shopcar",{
 						                params: {
 						                ID:this.$store.state.addshopcarlist[it1]
 						                }
@@ -113,7 +117,8 @@ if(localStorage.username){
 	
 	
 				    });
-				    this.$store.state.shopcarsuccess=false;
+				    this.$store.state.shopcarsuccess=true;
+//				    this.isLog=this.$store.state.shopcarsuccess;
 				}
 }
 

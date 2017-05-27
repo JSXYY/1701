@@ -146,6 +146,8 @@
 
     <script >
         import Vue from "vue";
+	import api from "../api";
+        
         import axios from "axios";
         import { Indicator } from 'mint-ui';
         import { Swipe, SwipeItem } from 'vue-swipe';
@@ -180,7 +182,7 @@
                 this.goback = true;
                 this.$emit('mjy',"商品详情");
                 Indicator.open();
-                axios.get("/api/product",{
+                axios.get(api.interface+"/api/product",{
                     params: {
                     ID:this.$route.query.id
                     }
@@ -232,7 +234,7 @@
                     // console.log(this.data.gdsid)
                     this.loading = true;
                     Indicator.open();
-                    axios.get("/api/getgdsdetail",{
+                    axios.get(api.interface+"/api/getgdsdetail",{
                         params: {
                         ID:this.data.gdsid
                         }

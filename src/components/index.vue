@@ -2,8 +2,7 @@
 	<div class="main"
 		 v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
         infinite-scroll-immediate-check ="false"
-        infinite-scroll-distance="100"
-	>
+        infinite-scroll-distance="100">
 				<div class="swiper-container">
 				    <div class="swiper-wrapper">
 				        <div class="swiper-slide" v-for="(data,index) in swiperList"
@@ -81,6 +80,7 @@
 			</div>
 </template>
 <script>
+	import api from "../api";
 	import { Indicator } from 'mint-ui';
 	import { InfiniteScroll } from 'mint-ui';
 	import Vue from "vue";
@@ -123,16 +123,16 @@
 							subUrl = urlStr.substring(urlStr.indexOf("product"));
 							resultUrl = ("?id=" + subUrl.substring(subUrl.indexOf("=") + 1));
 							window.location.assign("#/other/product" + resultUrl)
-
 						}
 
 					}
+
 				},
 				loadMore:function(){
 					if(this.isLoad){
 						this.loading = true;
 						Indicator.open();
-						axios.get("/api/loading",{
+						axios.get(api.interface+"/api/loading",{
 		                    params: {
 		                    	ID:this.num
 		                    }
@@ -157,14 +157,14 @@
 			},
 			mounted(){
 				Indicator.open();
-				axios.get("api/home").then(res=>{
+				axios.get(api.interface+"/api/home").then(res=>{
 					
 					this.swiperList = res.data.lblist;
 					this.originalityList = res.data.pmlist;
 					this.tjList = res.data.tjlist;
 					/*this.hostList = res.data.plistsyc*/
 					Indicator.close();
-				})
+				});
 
 			},
 			directives:{

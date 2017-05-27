@@ -1,5 +1,5 @@
 	<template>
-		<div>
+		<div id="home">
 			<div class="header">
 				<!-- <div class="logo">
 					<img src="../assets/d1_logo.png" height="100%" width="100%">
@@ -22,7 +22,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="nav">
+			<div class="nav" id="nav">
 				<ul>
 					<router-link to="/home/index" tag="li" active-class="active"><a>首页</a></router-link>
 					<router-link to="/home/result/012" tag="li" active-class="active"><a>家居</a></router-link>
@@ -54,7 +54,26 @@
 				backTop:function(){
 					javascript:scroll(0,0)
 					// document.body.scrollTop=0;
+				},
+				handleScroll:function(){
+					var a = document.getElementById("nav")
+					if(a){
+						console.log(a);
+						if(scrollY >= 40){
+							a.style.position = "fixed";
+							a.style.top= 0;
+							a.style.zIndex = 5
+						}else{
+							a.style.position= "static";
+						}
+					}
+					
 				}
+			},
+			mounted(){
+
+				window.addEventListener('scroll', this.handleScroll);
+
 			}
 		}
 	</script>

@@ -12,7 +12,7 @@ import Reg from "./components/reg.vue";
 import Shopcar from "./components/shopcar.vue";
 import Other from "./components/other.vue";
 import Index from "./components/index.vue"
-const routes= [
+var routes= [
 
 	{
 		path:"/",
@@ -75,7 +75,7 @@ const routes= [
 
 ]
 
-const router = new VueRouter({
+var router = new VueRouter({
 	routes,
 	scrollBehavior (to, from, savedPosition) {
 	  return { x: 0, y: 0 }

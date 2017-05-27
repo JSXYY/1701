@@ -9,7 +9,7 @@
 import axios from "axios"
 
 import router from "./router"
-
+import api from "./api";
 export default {
 
   data () {
@@ -18,7 +18,7 @@ export default {
     }
   },
   	mounted(){
-  		axios.post("/api/session").then(res=>{
+  		axios.post(api.interface+"/api/session").then(res=>{
   			if(res.data == "yes"){
   					router.push("/my")	
   			}else{

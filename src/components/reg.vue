@@ -67,7 +67,7 @@
 
 
     	import axios from "axios"
-
+	import api from "../api";
       	import router from "../router"
 
       	export default{
@@ -79,12 +79,14 @@
       		},
       		methods:{
       			register(){
+
       				if(this.phoneNum.length == 0){
       					alert("手机号不能为空")
 	      			}else if(this.password.length ==0){
 	      				alert("密码不能为空")
 	      			}else{
-	      				axios.post("/api/reg",{
+	      				//console.log("111")
+	      				axios.post(api.interface+"/api/reg",{
 	      					username:this.phoneNum,
 	      					userpassword:this.password
 	      				}).then(res=>{
@@ -96,7 +98,7 @@
 	      					}
 	      				})
 	      			}
-      			}
+		      	}
       		},
 
             mounted(){
