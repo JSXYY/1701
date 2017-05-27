@@ -8,7 +8,7 @@
 				        <div class="swiper-slide" v-for="(data,index) in swiperList"
 						v-swiperList="index"
 				        >
-							<img :src="data.pmpic">
+							<img :src="data.pmpic" @click="handelClick(data)">
 				        </div>
 				    </div>
 				    <!-- 如果需要分页器 -->
