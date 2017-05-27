@@ -20,7 +20,7 @@
 						</i>
 						<div class="txt">
 							<span id="muid">
-								15634203324
+								{{myname}}
 							</span>
 							<span id="mtype">
 								普通会员
@@ -121,6 +121,11 @@
 
     <script >
         export default {
+        	data(){
+        		return{
+        			myname:localStorage.username,
+        		}
+        	},
             mounted(){
 
 	            var i = document.getElementById("headPortrait");
