@@ -336,7 +336,6 @@
 <style >
 
     .main {
-        min-height: 300px;
         background-color: #fff;
         font-family: 微软雅黑;
         min-width: 320px;

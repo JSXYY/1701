@@ -12,7 +12,7 @@
 					<div class="getcode">
 						<div class="ph_err">
 						</div>
-						<input name="phone" id="phone" class="phonec" type="text" placeholder="输入手机号"   v-model="phoneNum">
+						<input name="phone" id="phone" class="phonec" type="text" placeholder="输入手机号"   v-model="phoneNum" >
 						<div class="yztxt">
 							<input name="yzcode" id="yzcode" placeholder="请输入右侧图片数字" class="yzcode mgt10"
 							type="text">
@@ -59,17 +59,17 @@
 
 			<div class="reg_msg" id="regmsg" style="display: none;">
 		</div>
-			</form>	
+			</form>
        </div>
     </template>
 
     <script >
 
-    	
+
     	import axios from "axios"
-    	
+
       	import router from "../router"
-      	
+
       	export default{
       		data(){
       			return{
@@ -79,22 +79,27 @@
       		},
       		methods:{
       			register(){
-      				//console.log("111")
-      				axios.post("/api/reg",{
-      					username:this.phoneNum,
-      					userpassword:this.password
-      				}).then(res=>{
-      					console.log(res)
-      					if(res.data=="创建成功"){
-      						router.push("/other/login")
-      					}else{
-      						alert("已有该用户")
-      					}
-      				})
+      				if(this.phoneNum.length == 0){
+      					alert("手机号不能为空")
+	      			}else if(this.password.length ==0){
+	      				alert("密码不能为空")
+	      			}else{
+	      				axios.post("/api/reg",{
+	      					username:this.phoneNum,
+	      					userpassword:this.password
+	      				}).then(res=>{
+	      					console.log(res)
+	      					if(res.data=="创建成功"){
+	      						router.push("/other/login")
+	      					}else{
+	      						alert("已有该用户")
+	      					}
+	      				})
+	      			}
       			}
       		},
-      		
-	      	mounted(){
+
+            mounted(){
                 this.$emit('mjy',"注册");
 	
             }

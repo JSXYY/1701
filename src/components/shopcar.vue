@@ -149,7 +149,7 @@ if(localStorage.username){
 					return sum;
 				},
 
-
+  
 			},
 			methods:{
 //				askshow(){
