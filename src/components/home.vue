@@ -58,7 +58,6 @@
 				handleScroll:function(){
 					var a = document.getElementById("nav")
 					if(a){
-						console.log(a);
 						if(scrollY >= 40){
 							a.style.position = "fixed";
 							a.style.top= 0;
@@ -67,7 +66,7 @@
 							a.style.position= "static";
 						}
 					}
-					
+
 				}
 			},
 			mounted(){

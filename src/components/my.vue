@@ -126,8 +126,20 @@
 	            var i = document.getElementById("headPortrait");
             	i.style.backgroundImage="url("+localStorage.headPortrait+")";
 	            i.onclick=function(){
-//	            	if(this.plus){
-//	            		console.log(0);
+	            	var userAgentInfo = navigator.userAgent;
+                    var Agents = ["Android", "iPhone",
+                                "SymbianOS", "Windows Phone",
+                                "iPad", "iPod"];
+                    var flag = true;
+                    for (var v = 0; v < Agents.length; v++) {
+                        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    console.log(flag);
+	            	if(!flag){
+	            		console.log(0);
 	            		plus.gallery.pick( function(path){
 						    console.log(path);
 						    console.log(i.style.backgroundImage);
@@ -136,9 +148,13 @@
 						}, function ( e ) {
 						    console.log( "取消选择图片" );
 						}, {filter:"image"} );
-//	            	}
-				
+	            	}
+
 				}
+
+                    
+
+
             }
         }
     </script>
