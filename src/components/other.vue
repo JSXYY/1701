@@ -13,7 +13,8 @@
             <a href="#/home"></a>
         </div>
         <div class="myuser">
-            <router-link :to="mysuccess?'/my':'/login'"></router-link>
+            <!--<router-link :to="mysuccess?'/my':'/other/login'"></router-link>-->
+            <router-link :to="mysuccess?'/other/login':'/my'"></router-link>
         </div>
         <div class="carth">
             <router-link to="shopcar"></router-link>

@@ -7,7 +7,7 @@
     				<span class="htxt">
     					帐号：</span>
     				<span class="l_input">
-    					<input name="user" id="user" placeholder="手机号/邮箱/用户名" type="text" v-model="username">
+    					<input name="user" id="user" placeholder="手机号/邮箱/用户名" type="text" v-model="username" >
     				</span>
     			</div>
     			<div class="login_pwd">
@@ -32,7 +32,7 @@
     						</a>
     					</span>
     					<span>
-    						<a href="http://m.d1.cn/wap/regmail.html">
+    						<a>
     							<i class="i2">
     							</i>
     							<br>
@@ -40,7 +40,7 @@
     						</a>
     					</span>
     					<span>
-    						<a href="http://m.d1.cn/wap/forgetpwd.jsp">
+    						<a>
     							<i class="i3">
     							</i>
     							<br>
@@ -59,7 +59,6 @@
 	import api from "../api";
         import router from "../router"
 
-
         export default {
 			data(){
 				return{
@@ -69,39 +68,43 @@
 			},
 			methods:{
 				login(){
-					axios.post(api.interface+"/api/login",{
-						username:this.username,
-						userpassword:this.password
-					}).then(res=>{
-//						console.log(res.data.username);
-						localStorage.username='';
-						this.$store.state.datalist=[];
-						this.$store.state.addshopcarlist=[];
-						this.$store.state.shopcarsuccess=false;
-						
-						localStorage.username=res.data.username;
-//						console.log(localStorage.username);
-//						this.$store.state.shopcar=res.data.shopcar;
-						if(res.data){
-							router.push("/other/shopcar")
-						}else{
-							alert("该用户未注册")
-							router.push("/other/reg")
-						}
-					})
+					if(this.username.length ==0){
+						alert("用户名不能为空")
+					}else if(this.password.length ==0){
+						alert("密码不能为空")
+					}else{
+						axios.post(api.interface+"/api/login",{
+							username:this.username,
+							userpassword:this.password
+						}).then(res=>{
+	//						console.log(res.data.username);
+							localStorage.username='';
+							this.$store.state.datalist=[];
+							this.$store.state.addshopcarlist=[];
+							this.$store.state.shopcarsuccess=false;
+							
+							localStorage.username=res.data.username;
+	//						console.log(localStorage.username);
+	//						this.$store.state.shopcar=res.data.shopcar;
+							if(res.data){
+								router.push("/other/shopcar")
+							}else{
+								alert("该用户未注册")
+								router.push("/other/reg")
+							}
+						})
+					}
 				}
 			},
             mounted(){
                 this.$emit('mjy',"登陆");
 
             }
-
     }
     </script>
 
 
     <style scoped>
-
 	    .main{
 	    	background: #ffffff;
 	    	font-family: "微软雅黑";
@@ -191,7 +194,7 @@
 	    }
 	    .main .login .login_but .regfind span a{
 	    	color: #c61621;
-	    	text-decoration: underline;
+	    	text-decoration: none;
 	    	display: inline-block;
 	    	width: 100%;
 	    	height: 100%;
