@@ -60,6 +60,7 @@
 	<script >
 		    import axios from "axios";
 		    import api from "../api";
+		    import { Indicator } from 'mint-ui';
 		export default {
 
 			data(){
@@ -87,6 +88,7 @@
 
 				if(!this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
+					Indicator.open();
 					axios.post(api.interface+"/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
 				            this.$store.state.addshopcarlist=res.data.split(",");
@@ -110,7 +112,7 @@
 						                	}
 						                this.$store.state.datalist.push(indatalist);
 	//					                console.log('aaaa');
-
+										Indicator.close();
 						            	})
 								}
 							}

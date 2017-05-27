@@ -82,7 +82,7 @@
 							this.$store.state.datalist=[];
 							this.$store.state.addshopcarlist=[];
 							this.$store.state.shopcarsuccess=false;
-							
+							this.$store.state.headPortrait="http://bpic.588ku.com/element_origin_min_pic/01/37/09/22573c3a831082c.jpg";
 							localStorage.username=res.data.username;
 	//						console.log(localStorage.username);
 	//						this.$store.state.shopcar=res.data.shopcar;
