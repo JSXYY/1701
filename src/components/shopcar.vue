@@ -69,17 +69,17 @@
 					username:'',
 //					userpassword:"",
 				}
-				
+
 			},
 			watch:{
 			},
 
 //			开始执行
-			mounted(){   
+			mounted(){
 			this.$emit('mjy',"购物车");
 			console.log(localStorage.username);
 //			console.log(this.$store.state.addshopcarlist);
-			
+
 //			this.$store.state.addshopcarlist
 			if(localStorage.username){
 	//存在用户名
@@ -110,12 +110,12 @@
 						                	}
 						                this.$store.state.datalist.push(indatalist);
 	//					                console.log('aaaa');
-	
+
 						            	})
 								}
 							}
-	
-	
+
+
 				    });
 				    this.$store.state.shopcarsuccess=true;
 //				    this.isLog=this.$store.state.shopcarsuccess;
@@ -154,7 +154,7 @@
 					return sum;
 				},
 
-  
+
 			},
 			methods:{
 //				askshow(){

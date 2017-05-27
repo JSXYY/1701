@@ -2,6 +2,7 @@ import vue from "vue";
 import vuex from "vuex";
 import axios from "axios";
 import api from "./api";
+import { Toast } from 'mint-ui';
 vue.use(vuex);
 
 
@@ -27,7 +28,7 @@ const store = new vuex.Store({
 		shopcarsuccess:false,
 		headPortrait:"http://bpic.588ku.com/element_origin_min_pic/01/37/09/22573c3a831082c.jpg"
 //		username:'',
-		
+
 //		func:(function(){
 //			console.log(this.state.addshopcarlist);
 //		})()
@@ -71,15 +72,15 @@ const store = new vuex.Store({
 		'todba':function(store,payload){
 			store.commit('todb',payload);
 		},
-		
+
 	},
 
 	mutations:{
 		"ADD_SHOPCAR_MUTATION":function(state,num,payload){
 			// console.log(payload);
 			// 操作state
-			
-			
+
+
 			let inhave=true;
 //			console.log(state.addshopcarlist[1]);
 			for(let i=0;i<state.addshopcarlist.length;i++){
@@ -89,17 +90,17 @@ const store = new vuex.Store({
 //				console.log(state.addshopcarlist[i]>100);
 				if(state.addshopcarlist[i]>100){
 //						console.log(state.addshopcarlist[i]==num[1]);
-					
+
 					if(state.addshopcarlist[i]==num[1]){
 						inhave=false;
 //						console.log('已存在id不添加，立即退出查找循环');
 //						console.log(state.addshopcarlist);
-						
+
 						break;
 					}
 				}
 			}
-			
+
 			if(inhave){
 //				console.log('不存在开始添加');
 				state.addshopcarlist.push(num[1]);
@@ -180,16 +181,21 @@ const store = new vuex.Store({
 			state.addshopcarlist[n]=state.addshopcarlist[n]-1;
 			if(state.addshopcarlist[n]<0){
 				state.addshopcarlist[n]=0;
-			} 
+			}
 		},
 		//返回给数据库
 		'todb':function(state,payload){
 			axios.post(api.interface+"/api/shopcar",{
 			                username:localStorage.username,
 			                shopcar:state.addshopcarlist
-			                
+
 			                }).then(res=>{
 			                	console.log('成功提交给数据库');
+			                	Toast({
+			                	  message: '添加成功',
+			                	  position: 'bottom',
+			                	  duration: 2000
+			                	});
 //			                	console.log(res.config.data);.shopcar.split(",")
 //			                	state.addshopcarlist=JSON.parse(res.config.data).shopcar;
 //			                	console.log(state.addshopcarlist);
