@@ -59,6 +59,7 @@
 
 	<script >
 		    import axios from "axios";
+		    import api from "../api";
 		export default {
 
 			data(){
@@ -84,15 +85,15 @@
 	//存在用户名
 				this.isLog=true;
 
-//				if(this.$store.state.shopcarsuccess){
+				if(!this.$store.state.shopcarsuccess){
 //					this.shopcarsuccess=false;
-					axios.post("/api/usercar",{username:localStorage.username}).then(res=>{
+					axios.post(api.interface+"/api/usercar",{username:localStorage.username}).then(res=>{
 	//			                	console.log(res.data);
 				            this.$store.state.addshopcarlist=res.data.split(",");
 							for(var it1 in this.$store.state.addshopcarlist){
 								if(this.$store.state.addshopcarlist[it1]>100){
 									let nu=it1-(-1);
-									axios.get("/api/shopcar",{
+									axios.get(api.interface+"/api/shopcar",{
 						                params: {
 						                ID:this.$store.state.addshopcarlist[it1]
 						                }
@@ -116,9 +117,9 @@
 	
 	
 				    });
-//				    this.$store.state.shopcarsuccess=false;
+				    this.$store.state.shopcarsuccess=true;
 //				    this.isLog=this.$store.state.shopcarsuccess;
-				
+				}
 }
 
 //传入参数，获取整个对象，处理

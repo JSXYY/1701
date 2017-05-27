@@ -67,7 +67,7 @@
 
 
     	import axios from "axios"
-
+	import api from "../api";
       	import router from "../router"
 
       	export default{
@@ -80,7 +80,7 @@
       		methods:{
       			register(){
       				//console.log("111")
-      				axios.post("/api/reg",{
+      				axios.post(api.interface+"/api/reg",{
       					username:this.phoneNum,
       					userpassword:this.password
       				}).then(res=>{

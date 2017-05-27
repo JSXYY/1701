@@ -16,11 +16,11 @@
            <div class="main">
 				<div class="umenu">
 					<div class="um_top">
-						<i>
+						<i id="headPortrait">
 						</i>
 						<div class="txt">
 							<span id="muid">
-								15634203324
+								{{myname}}
 							</span>
 							<span id="mtype">
 								普通会员
@@ -121,28 +121,29 @@
 
     <script >
         export default {
+        	data(){
+        		return{
+        			myname:localStorage.username,
+        		}
+        	},
             mounted(){
-                document.addEventListener('deviceready', onDeviceReady, false);
 
-                function onDeviceReady(){
-                    var i = $('.um_top').find("i");
-                        console.log(2);
-                    i.click(function(){
-                        navigator.camera.getPicture(onSuccess, onFail, {
-                            quality: 50,
-                            sourceType : Camera.PictureSourceType.PHOTOLIBRARY ,
-                            allowEdit : true,
-                         });
-
-                        function onSuccess(imageData) {
-                           console.log(imageData);
-                        }
-
-                        function onFail(message) {
-                           alert('Failed because: ' + message);
-                        }
-                    })
-                }
+	            var i = document.getElementById("headPortrait");
+            	i.style.backgroundImage="url("+localStorage.headPortrait+")";
+	            i.onclick=function(){
+//	            	if(this.plus){
+//	            		console.log(0);
+	            		plus.gallery.pick( function(path){
+						    console.log(path);
+						    console.log(i.style.backgroundImage);
+						    i.style.backgroundImage="url("+path+")";
+						    localStorage.headPortrait=path;
+						}, function ( e ) {
+						    console.log( "取消选择图片" );
+						}, {filter:"image"} );
+//	            	}
+				
+				}
             }
         }
     </script>
@@ -219,7 +220,7 @@
     width: 1.00rem;
     height: 1.00rem;
     display: block;
-    background: url(../assets/22573c3a831082c.jpg)  center center no-repeat;
+    background: url(http://bpic.588ku.com/element_origin_min_pic/01/37/09/22573c3a831082c.jpg)  center center no-repeat;
     background-size: 60%
 }
 .mitem li.bg2 i {

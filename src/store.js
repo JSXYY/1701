@@ -1,7 +1,7 @@
 import vue from "vue";
 import vuex from "vuex";
 import axios from "axios";
-
+import api from "./api";
 vue.use(vuex);
 
 
@@ -25,6 +25,7 @@ const store = new vuex.Store({
 		//下面这个只存储商品id，这是从服务器查找到的
 		addshopcarlist:[],
 		shopcarsuccess:false,
+		headPortrait:"http://bpic.588ku.com/element_origin_min_pic/01/37/09/22573c3a831082c.jpg"
 //		username:'',
 		
 //		func:(function(){
@@ -104,7 +105,7 @@ const store = new vuex.Store({
 				state.addshopcarlist.push(num[1]);
 				state.addshopcarlist.push(num[0]);
 //				console.log(state.addshopcarlist);
-				axios.get("/api/shopcar",{
+				axios.get(api.interface+"/api/shopcar",{
 			                params: {
 			                ID:num[1]
 			                }
@@ -183,7 +184,7 @@ const store = new vuex.Store({
 		},
 		//返回给数据库
 		'todb':function(state,payload){
-			axios.post("/api/shopcar",{
+			axios.post(api.interface+"/api/shopcar",{
 			                username:localStorage.username,
 			                shopcar:state.addshopcarlist
 			                
