@@ -20,7 +20,7 @@
 						</i>
 						<div class="txt">
 							<span id="muid">
-								15634203324
+								{{myname}}
 							</span>
 							<span id="mtype">
 								普通会员
@@ -121,24 +121,31 @@
 
     <script >
         export default {
+        	data(){
+        		return{
+        			myname:localStorage.username,
+        		}
+        	},
             mounted(){
 
 	            var i = document.getElementById("headPortrait");
             	i.style.backgroundImage="url("+localStorage.headPortrait+")";
 	            i.onclick=function(){
-	            	var userAgentInfo = navigator.userAgent;
-                    var Agents = ["Android", "iPhone",
-                                "SymbianOS", "Windows Phone",
-                                "iPad", "iPod"];
-                    var flag = true;
-                    for (var v = 0; v < Agents.length; v++) {
-                        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    console.log(flag);
-	            	if(!flag){
+	            	// var userAgentInfo = navigator.userAgent;
+              //       var Agents = ["Android", "iPhone",
+              //                   "SymbianOS", "Windows Phone",
+              //                   "iPad", "iPod"];
+              //       var flag = true;
+              //       for (var v = 0; v < Agents.length; v++) {
+              //           if (userAgentInfo.indexOf(Agents[v]) > 0) {
+              //               flag = false;
+              //               break;
+              //           }
+              //       }
+              // var u = navigator.userAgent;
+              // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+                    // console.log(typeof(plus));
+	            	if(typeof(plus)!="undefined"){
 	            		console.log(0);
 	            		plus.gallery.pick( function(path){
 						    console.log(path);
@@ -152,7 +159,7 @@
 
 				}
 
-                    
+
 
 
             }
