@@ -42,9 +42,9 @@
 					</div>
 					<ul>
 						<li v-for = "data in originalityList" @click = "handelClick(data)">
-							
-								<img :src="data.pmpic" style="height:100%;width:100%">	
-							
+
+								<img :src="data.pmpic" style="height:100%;width:100%">
+
 						</li>
 
 					</ul>
@@ -83,8 +83,8 @@
 	import api from "../api";
 	import { Indicator } from 'mint-ui';
 	import { InfiniteScroll } from 'mint-ui';
-	import Vue from "vue";
 	Vue.use(InfiniteScroll);
+	import Vue from "vue";
 	import Swiper from "swiper";
 	import axios from "axios";
 	import "swiper/dist/css/swiper.css"
@@ -137,10 +137,10 @@
 		                    	ID:this.num
 		                    }
 		                    }).then(res=>{
-		                    	
+
 		                   	this.hostList = [...this.hostList,...res.data.products];
 		                   	for(var i = (this.num-1)*8; i < this.hostList.length; i++){
-		                   		this.hostSrc.push("http://m.d1.cn" + this.hostList[i].p_img) 
+		                   		this.hostSrc.push("http://m.d1.cn" + this.hostList[i].p_img)
 		                   	}
 		                    this.num++
 		                    Indicator.close();
@@ -149,7 +149,7 @@
 	               				this.isLoad = false;
 	               			 	Indicator.close();
 		                   	// console.log(this.hostSrc)
-	               			 	
+
 	               		})
 	               	}
 
@@ -158,7 +158,7 @@
 			mounted(){
 				Indicator.open();
 				axios.get(api.interface+"/api/home").then(res=>{
-					
+
 					this.swiperList = res.data.lblist;
 					this.originalityList = res.data.pmlist;
 					this.tjList = res.data.tjlist;
@@ -177,7 +177,7 @@
                                 autoplay: 3000,
                                 loop:true,
                                 speed:1000,
-                                
+
                             });
 						}
 					}
@@ -299,5 +299,5 @@
 			height: 0.224rem;
 			color: #f1424f;
 		}
-	
+
 </style>

@@ -146,8 +146,8 @@
 
     <script >
         import Vue from "vue";
-	import api from "../api";
-        
+	    import api from "../api";
+
         import axios from "axios";
         import { Indicator } from 'mint-ui';
         import { Swipe, SwipeItem } from 'vue-swipe';

@@ -279,20 +279,23 @@
                         })
                 },
                 next(){
-                    // console.log(1);
-                    $(".l").css("display","block");
+                    // console.log( document.getElementsByClassName("l")[0].style.display);
+                    // $(".l").css("display","block");
+                    document.getElementsByClassName("l")[0].style.display="block";
                     if(this.pagenow<this.page){
                         this.pagenow++;
                         this.load();
                     }
                 },
                 last(){
-                    $(".l").css("display","block");
+                    document.getElementsByClassName("l")[0].style.display="block";
+                    // $(".l").css("display","block");
                     this.pagenow=this.page;
                     this.load();
                 },
                 first(){
-                    $(".l").css("display","none");
+                    document.getElementsByClassName("l")[0].style.display="none";
+                    // $(".l").css("display","none");
                     this.pagenow="1";
                     this.load();
                 },
@@ -301,7 +304,8 @@
                         this.pagenow--
                     }
                     if(this.pagenow<2){
-                        $(".l").css("display","none");
+                    document.getElementsByClassName("l")[0].style.display="none";
+                        // $(".l").css("display","none");
                     }
                     this.load();
                 },
