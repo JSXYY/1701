@@ -7,7 +7,7 @@
 <script>
 
 import axios from "axios"
-
+//import { MessageBox } from 'mint-ui';
 import router from "./router"
 import api from "./api";
 export default {
@@ -25,6 +25,14 @@ export default {
   					router.push("/other/login")
   			}
   		})
+  		
+//		plus.key.addEventListener("backbutton",function(){
+//				MessageBox({
+//				  title: '提示',
+//				  message: '确定退出吗?',
+//				  showCancelButton: true
+//				});
+//			});
   	}
 }
 </script>

@@ -106,7 +106,7 @@
 					</span>
 					<span class="top">
 						<a href="#">
-							回到顶部
+							回到首页
 						</a>
 					</span>
 				</div>
